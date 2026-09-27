@@ -1,0 +1,1196 @@
+{
+ "headline": {
+  "lap_rows": 589081,
+  "driver_races": 11041,
+  "races": 544,
+  "seasons": 29,
+  "first_year": 1996,
+  "last_year": 2024,
+  "drivers": 143,
+  "constructors": 43,
+  "race_laps": 33196,
+  "finish_rate": 79.4
+ },
+ "laps_led_drivers": [
+  {
+   "driver": "Lewis Hamilton",
+   "laps_led": 5487,
+   "wins": 103,
+   "share": 16.5
+  },
+  {
+   "driver": "Michael Schumacher",
+   "laps_led": 3937,
+   "wins": 72,
+   "share": 11.9
+  },
+  {
+   "driver": "Sebastian Vettel",
+   "laps_led": 3501,
+   "wins": 54,
+   "share": 10.5
+  },
+  {
+   "driver": "Max Verstappen",
+   "laps_led": 3418,
+   "wins": 63,
+   "share": 10.3
+  },
+  {
+   "driver": "Fernando Alonso",
+   "laps_led": 1773,
+   "wins": 32,
+   "share": 5.3
+  },
+  {
+   "driver": "Nico Rosberg",
+   "laps_led": 1533,
+   "wins": 23,
+   "share": 4.6
+  },
+  {
+   "driver": "Mika H\u00e4kkinen",
+   "laps_led": 1474,
+   "wins": 20,
+   "share": 4.4
+  },
+  {
+   "driver": "Kimi R\u00e4ikk\u00f6nen",
+   "laps_led": 1305,
+   "wins": 21,
+   "share": 3.9
+  },
+  {
+   "driver": "Felipe Massa",
+   "laps_led": 937,
+   "wins": 11,
+   "share": 2.8
+  },
+  {
+   "driver": "Rubens Barrichello",
+   "laps_led": 850,
+   "wins": 11,
+   "share": 2.6
+  }
+ ],
+ "dominant_team": [
+  {
+   "year": 1996,
+   "constructor": "Williams",
+   "team": "Williams",
+   "laps_led": 765,
+   "share": 75.4
+  },
+  {
+   "year": 1997,
+   "constructor": "Williams",
+   "team": "Williams",
+   "laps_led": 424,
+   "share": 40.2
+  },
+  {
+   "year": 1998,
+   "constructor": "McLaren",
+   "team": "McLaren",
+   "laps_led": 696,
+   "share": 68.6
+  },
+  {
+   "year": 1999,
+   "constructor": "McLaren",
+   "team": "McLaren",
+   "laps_led": 528,
+   "share": 52.8
+  },
+  {
+   "year": 2000,
+   "constructor": "Ferrari",
+   "team": "Ferrari",
+   "laps_led": 606,
+   "share": 56.4
+  },
+  {
+   "year": 2001,
+   "constructor": "Ferrari",
+   "team": "Ferrari",
+   "laps_led": 614,
+   "share": 57.7
+  },
+  {
+   "year": 2002,
+   "constructor": "Ferrari",
+   "team": "Ferrari",
+   "laps_led": 865,
+   "share": 79.4
+  },
+  {
+   "year": 2003,
+   "constructor": "Ferrari",
+   "team": "Ferrari",
+   "laps_led": 383,
+   "share": 37.6
+  },
+  {
+   "year": 2004,
+   "constructor": "Ferrari",
+   "team": "Ferrari",
+   "laps_led": 785,
+   "share": 70.0
+  },
+  {
+   "year": 2005,
+   "constructor": "McLaren",
+   "team": "McLaren",
+   "laps_led": 592,
+   "share": 50.2
+  },
+  {
+   "year": 2006,
+   "constructor": "Ferrari",
+   "team": "Ferrari",
+   "laps_led": 520,
+   "share": 45.7
+  },
+  {
+   "year": 2007,
+   "constructor": "McLaren",
+   "team": "McLaren",
+   "laps_led": 524,
+   "share": 49.2
+  },
+  {
+   "year": 2008,
+   "constructor": "Ferrari",
+   "team": "Ferrari",
+   "laps_led": 542,
+   "share": 48.5
+  },
+  {
+   "year": 2009,
+   "constructor": "Brawn",
+   "team": "Mercedes",
+   "laps_led": 405,
+   "share": 41.0
+  },
+  {
+   "year": 2010,
+   "constructor": "Red Bull",
+   "team": "Red Bull",
+   "laps_led": 699,
+   "share": 61.9
+  },
+  {
+   "year": 2011,
+   "constructor": "Red Bull",
+   "team": "Red Bull",
+   "laps_led": 798,
+   "share": 70.4
+  },
+  {
+   "year": 2012,
+   "constructor": "Red Bull",
+   "team": "Red Bull",
+   "laps_led": 434,
+   "share": 36.4
+  },
+  {
+   "year": 2013,
+   "constructor": "Red Bull",
+   "team": "Red Bull",
+   "laps_led": 753,
+   "share": 66.6
+  },
+  {
+   "year": 2014,
+   "constructor": "Mercedes",
+   "team": "Mercedes",
+   "laps_led": 980,
+   "share": 86.3
+  },
+  {
+   "year": 2015,
+   "constructor": "Mercedes",
+   "team": "Mercedes",
+   "laps_led": 936,
+   "share": 81.5
+  },
+  {
+   "year": 2016,
+   "constructor": "Mercedes",
+   "team": "Mercedes",
+   "laps_led": 1055,
+   "share": 83.2
+  },
+  {
+   "year": 2017,
+   "constructor": "Mercedes",
+   "team": "Mercedes",
+   "laps_led": 714,
+   "share": 59.7
+  },
+  {
+   "year": 2018,
+   "constructor": "Mercedes",
+   "team": "Mercedes",
+   "laps_led": 542,
+   "share": 42.9
+  },
+  {
+   "year": 2019,
+   "constructor": "Mercedes",
+   "team": "Mercedes",
+   "laps_led": 696,
+   "share": 55.2
+  },
+  {
+   "year": 2020,
+   "constructor": "Mercedes",
+   "team": "Mercedes",
+   "laps_led": 860,
+   "share": 82.9
+  },
+  {
+   "year": 2021,
+   "constructor": "Red Bull",
+   "team": "Red Bull",
+   "laps_led": 698,
+   "share": 53.8
+  },
+  {
+   "year": 2022,
+   "constructor": "Red Bull",
+   "team": "Red Bull",
+   "laps_led": 763,
+   "share": 59.0
+  },
+  {
+   "year": 2023,
+   "constructor": "Red Bull",
+   "team": "Red Bull",
+   "laps_led": 1149,
+   "share": 86.7
+  },
+  {
+   "year": 2024,
+   "constructor": "Red Bull",
+   "team": "Red Bull",
+   "laps_led": 561,
+   "share": 38.9
+  }
+ ],
+ "win_by_lap1": [
+  {
+   "lap1_pos": 1,
+   "driver_races": 544,
+   "wins": 301,
+   "win_rate": 55.3
+  },
+  {
+   "lap1_pos": 2,
+   "driver_races": 544,
+   "wins": 125,
+   "win_rate": 23.0
+  },
+  {
+   "lap1_pos": 3,
+   "driver_races": 544,
+   "wins": 54,
+   "win_rate": 9.9
+  },
+  {
+   "lap1_pos": 4,
+   "driver_races": 544,
+   "wins": 18,
+   "win_rate": 3.3
+  },
+  {
+   "lap1_pos": 5,
+   "driver_races": 544,
+   "wins": 15,
+   "win_rate": 2.8
+  },
+  {
+   "lap1_pos": 6,
+   "driver_races": 544,
+   "wins": 11,
+   "win_rate": 2.0
+  },
+  {
+   "lap1_pos": 7,
+   "driver_races": 543,
+   "wins": 3,
+   "win_rate": 0.6
+  },
+  {
+   "lap1_pos": 8,
+   "driver_races": 543,
+   "wins": 4,
+   "win_rate": 0.7
+  },
+  {
+   "lap1_pos": 9,
+   "driver_races": 543,
+   "wins": 2,
+   "win_rate": 0.4
+  },
+  {
+   "lap1_pos": 10,
+   "driver_races": 543,
+   "wins": 3,
+   "win_rate": 0.6
+  },
+  {
+   "lap1_pos": 11,
+   "driver_races": 543,
+   "wins": 2,
+   "win_rate": 0.4
+  },
+  {
+   "lap1_pos": 12,
+   "driver_races": 543,
+   "wins": 3,
+   "win_rate": 0.6
+  },
+  {
+   "lap1_pos": 13,
+   "driver_races": 543,
+   "wins": 2,
+   "win_rate": 0.4
+  },
+  {
+   "lap1_pos": 14,
+   "driver_races": 542,
+   "wins": 0,
+   "win_rate": 0.0
+  },
+  {
+   "lap1_pos": 15,
+   "driver_races": 541,
+   "wins": 0,
+   "win_rate": 0.0
+  },
+  {
+   "lap1_pos": 16,
+   "driver_races": 539,
+   "wins": 0,
+   "win_rate": 0.0
+  },
+  {
+   "lap1_pos": 17,
+   "driver_races": 529,
+   "wins": 0,
+   "win_rate": 0.0
+  },
+  {
+   "lap1_pos": 18,
+   "driver_races": 514,
+   "wins": 1,
+   "win_rate": 0.2
+  },
+  {
+   "lap1_pos": 19,
+   "driver_races": 479,
+   "wins": 0,
+   "win_rate": 0.0
+  },
+  {
+   "lap1_pos": 20,
+   "driver_races": 413,
+   "wins": 0,
+   "win_rate": 0.0
+  }
+ ],
+ "finish_rate": [
+  {
+   "year": 1996,
+   "driver_races": 310,
+   "classified": 176,
+   "finish_rate": 56.8
+  },
+  {
+   "year": 1997,
+   "driver_races": 355,
+   "classified": 217,
+   "finish_rate": 61.1
+  },
+  {
+   "year": 1998,
+   "driver_races": 329,
+   "classified": 204,
+   "finish_rate": 62.0
+  },
+  {
+   "year": 1999,
+   "driver_races": 330,
+   "classified": 194,
+   "finish_rate": 58.8
+  },
+  {
+   "year": 2000,
+   "driver_races": 354,
+   "classified": 232,
+   "finish_rate": 65.5
+  },
+  {
+   "year": 2001,
+   "driver_races": 355,
+   "classified": 227,
+   "finish_rate": 63.9
+  },
+  {
+   "year": 2002,
+   "driver_races": 341,
+   "classified": 212,
+   "finish_rate": 62.2
+  },
+  {
+   "year": 2003,
+   "driver_races": 307,
+   "classified": 214,
+   "finish_rate": 69.7
+  },
+  {
+   "year": 2004,
+   "driver_races": 347,
+   "classified": 265,
+   "finish_rate": 76.4
+  },
+  {
+   "year": 2005,
+   "driver_races": 355,
+   "classified": 284,
+   "finish_rate": 80.0
+  },
+  {
+   "year": 2006,
+   "driver_races": 374,
+   "classified": 278,
+   "finish_rate": 74.3
+  },
+  {
+   "year": 2007,
+   "driver_races": 366,
+   "classified": 281,
+   "finish_rate": 76.8
+  },
+  {
+   "year": 2008,
+   "driver_races": 352,
+   "classified": 288,
+   "finish_rate": 81.8
+  },
+  {
+   "year": 2009,
+   "driver_races": 324,
+   "classified": 280,
+   "finish_rate": 86.4
+  },
+  {
+   "year": 2010,
+   "driver_races": 434,
+   "classified": 346,
+   "finish_rate": 79.7
+  },
+  {
+   "year": 2011,
+   "driver_races": 447,
+   "classified": 376,
+   "finish_rate": 84.1
+  },
+  {
+   "year": 2012,
+   "driver_races": 462,
+   "classified": 401,
+   "finish_rate": 86.8
+  },
+  {
+   "year": 2013,
+   "driver_races": 412,
+   "classified": 366,
+   "finish_rate": 88.8
+  },
+  {
+   "year": 2014,
+   "driver_races": 395,
+   "classified": 328,
+   "finish_rate": 83.0
+  },
+  {
+   "year": 2015,
+   "driver_races": 360,
+   "classified": 305,
+   "finish_rate": 84.7
+  },
+  {
+   "year": 2016,
+   "driver_races": 448,
+   "classified": 383,
+   "finish_rate": 85.5
+  },
+  {
+   "year": 2017,
+   "driver_races": 380,
+   "classified": 314,
+   "finish_rate": 82.6
+  },
+  {
+   "year": 2018,
+   "driver_races": 404,
+   "classified": 347,
+   "finish_rate": 85.9
+  },
+  {
+   "year": 2019,
+   "driver_races": 418,
+   "classified": 374,
+   "finish_rate": 89.5
+  },
+  {
+   "year": 2020,
+   "driver_races": 331,
+   "classified": 287,
+   "finish_rate": 86.7
+  },
+  {
+   "year": 2021,
+   "driver_races": 427,
+   "classified": 391,
+   "finish_rate": 91.6
+  },
+  {
+   "year": 2022,
+   "driver_races": 429,
+   "classified": 376,
+   "finish_rate": 87.6
+  },
+  {
+   "year": 2023,
+   "driver_races": 430,
+   "classified": 390,
+   "finish_rate": 90.7
+  },
+  {
+   "year": 2024,
+   "driver_races": 465,
+   "classified": 432,
+   "finish_rate": 92.9
+  }
+ ],
+ "track_gains": [
+  {
+   "year": 1996,
+   "track_gains": 1946,
+   "races": 16,
+   "gains_per_race": 121.6
+  },
+  {
+   "year": 1997,
+   "track_gains": 2642,
+   "races": 17,
+   "gains_per_race": 155.4
+  },
+  {
+   "year": 1998,
+   "track_gains": 1827,
+   "races": 16,
+   "gains_per_race": 114.2
+  },
+  {
+   "year": 1999,
+   "track_gains": 2151,
+   "races": 16,
+   "gains_per_race": 134.4
+  },
+  {
+   "year": 2000,
+   "track_gains": 2744,
+   "races": 17,
+   "gains_per_race": 161.4
+  },
+  {
+   "year": 2001,
+   "track_gains": 2256,
+   "races": 17,
+   "gains_per_race": 132.7
+  },
+  {
+   "year": 2002,
+   "track_gains": 2294,
+   "races": 17,
+   "gains_per_race": 134.9
+  },
+  {
+   "year": 2003,
+   "track_gains": 2955,
+   "races": 16,
+   "gains_per_race": 184.7
+  },
+  {
+   "year": 2004,
+   "track_gains": 3194,
+   "races": 18,
+   "gains_per_race": 177.4
+  },
+  {
+   "year": 2005,
+   "track_gains": 2325,
+   "races": 19,
+   "gains_per_race": 122.4
+  },
+  {
+   "year": 2006,
+   "track_gains": 2524,
+   "races": 18,
+   "gains_per_race": 140.2
+  },
+  {
+   "year": 2007,
+   "track_gains": 2974,
+   "races": 17,
+   "gains_per_race": 174.9
+  },
+  {
+   "year": 2008,
+   "track_gains": 3123,
+   "races": 18,
+   "gains_per_race": 173.5
+  },
+  {
+   "year": 2009,
+   "track_gains": 2768,
+   "races": 17,
+   "gains_per_race": 162.8
+  },
+  {
+   "year": 2010,
+   "track_gains": 2747,
+   "races": 19,
+   "gains_per_race": 144.6
+  },
+  {
+   "year": 2011,
+   "track_gains": 4627,
+   "races": 19,
+   "gains_per_race": 243.5
+  },
+  {
+   "year": 2012,
+   "track_gains": 5077,
+   "races": 20,
+   "gains_per_race": 253.8
+  },
+  {
+   "year": 2013,
+   "track_gains": 4697,
+   "races": 19,
+   "gains_per_race": 247.2
+  },
+  {
+   "year": 2014,
+   "track_gains": 3873,
+   "races": 19,
+   "gains_per_race": 203.8
+  },
+  {
+   "year": 2015,
+   "track_gains": 2747,
+   "races": 19,
+   "gains_per_race": 144.6
+  },
+  {
+   "year": 2016,
+   "track_gains": 4613,
+   "races": 21,
+   "gains_per_race": 219.7
+  },
+  {
+   "year": 2017,
+   "track_gains": 2167,
+   "races": 20,
+   "gains_per_race": 108.4
+  },
+  {
+   "year": 2018,
+   "track_gains": 2692,
+   "races": 21,
+   "gains_per_race": 128.2
+  },
+  {
+   "year": 2019,
+   "track_gains": 3201,
+   "races": 21,
+   "gains_per_race": 152.4
+  },
+  {
+   "year": 2020,
+   "track_gains": 2612,
+   "races": 17,
+   "gains_per_race": 153.6
+  },
+  {
+   "year": 2021,
+   "track_gains": 2901,
+   "races": 22,
+   "gains_per_race": 131.9
+  },
+  {
+   "year": 2022,
+   "track_gains": 3704,
+   "races": 22,
+   "gains_per_race": 168.4
+  },
+  {
+   "year": 2023,
+   "track_gains": 4101,
+   "races": 22,
+   "gains_per_race": 186.4
+  },
+  {
+   "year": 2024,
+   "track_gains": 3768,
+   "races": 24,
+   "gains_per_race": 157.0
+  }
+ ],
+ "monaco": [
+  {
+   "year": 1996,
+   "best_ms": 85205,
+   "best_s": 85.205
+  },
+  {
+   "year": 1997,
+   "best_ms": 113315,
+   "best_s": 113.315
+  },
+  {
+   "year": 1998,
+   "best_ms": 82948,
+   "best_s": 82.948
+  },
+  {
+   "year": 1999,
+   "best_ms": 82259,
+   "best_s": 82.259
+  },
+  {
+   "year": 2000,
+   "best_ms": 81571,
+   "best_s": 81.571
+  },
+  {
+   "year": 2001,
+   "best_ms": 79424,
+   "best_s": 79.424
+  },
+  {
+   "year": 2002,
+   "best_ms": 78023,
+   "best_s": 78.023
+  },
+  {
+   "year": 2003,
+   "best_ms": 74545,
+   "best_s": 74.545
+  },
+  {
+   "year": 2004,
+   "best_ms": 74439,
+   "best_s": 74.439
+  },
+  {
+   "year": 2005,
+   "best_ms": 75842,
+   "best_s": 75.842
+  },
+  {
+   "year": 2006,
+   "best_ms": 75143,
+   "best_s": 75.143
+  },
+  {
+   "year": 2007,
+   "best_ms": 75284,
+   "best_s": 75.284
+  },
+  {
+   "year": 2008,
+   "best_ms": 76689,
+   "best_s": 76.689
+  },
+  {
+   "year": 2009,
+   "best_ms": 75154,
+   "best_s": 75.154
+  },
+  {
+   "year": 2010,
+   "best_ms": 75192,
+   "best_s": 75.192
+  },
+  {
+   "year": 2011,
+   "best_ms": 76234,
+   "best_s": 76.234
+  },
+  {
+   "year": 2012,
+   "best_ms": 77296,
+   "best_s": 77.296
+  },
+  {
+   "year": 2013,
+   "best_ms": 76577,
+   "best_s": 76.577
+  },
+  {
+   "year": 2014,
+   "best_ms": 78479,
+   "best_s": 78.479
+  },
+  {
+   "year": 2015,
+   "best_ms": 78063,
+   "best_s": 78.063
+  },
+  {
+   "year": 2016,
+   "best_ms": 77939,
+   "best_s": 77.939
+  },
+  {
+   "year": 2017,
+   "best_ms": 74820,
+   "best_s": 74.82
+  },
+  {
+   "year": 2018,
+   "best_ms": 74260,
+   "best_s": 74.26
+  },
+  {
+   "year": 2019,
+   "best_ms": 74279,
+   "best_s": 74.279
+  },
+  {
+   "year": 2021,
+   "best_ms": 72909,
+   "best_s": 72.909
+  },
+  {
+   "year": 2022,
+   "best_ms": 74693,
+   "best_s": 74.693
+  },
+  {
+   "year": 2023,
+   "best_ms": 75650,
+   "best_s": 75.65
+  },
+  {
+   "year": 2024,
+   "best_ms": 74165,
+   "best_s": 74.165
+  }
+ ],
+ "calendar": [
+  {
+   "year": 1996,
+   "races": 16,
+   "laps": 14431
+  },
+  {
+   "year": 1997,
+   "races": 17,
+   "laps": 17206
+  },
+  {
+   "year": 1998,
+   "races": 16,
+   "laps": 16175
+  },
+  {
+   "year": 1999,
+   "races": 16,
+   "laps": 15804
+  },
+  {
+   "year": 2000,
+   "races": 17,
+   "laps": 17977
+  },
+  {
+   "year": 2001,
+   "races": 17,
+   "laps": 17357
+  },
+  {
+   "year": 2002,
+   "races": 17,
+   "laps": 17350
+  },
+  {
+   "year": 2003,
+   "races": 16,
+   "laps": 16043
+  },
+  {
+   "year": 2004,
+   "races": 18,
+   "laps": 18608
+  },
+  {
+   "year": 2005,
+   "races": 19,
+   "laps": 19204
+  },
+  {
+   "year": 2006,
+   "races": 18,
+   "laps": 19920
+  },
+  {
+   "year": 2007,
+   "races": 17,
+   "laps": 19563
+  },
+  {
+   "year": 2008,
+   "races": 18,
+   "laps": 19449
+  },
+  {
+   "year": 2009,
+   "races": 17,
+   "laps": 17186
+  },
+  {
+   "year": 2010,
+   "races": 19,
+   "laps": 22534
+  },
+  {
+   "year": 2011,
+   "races": 19,
+   "laps": 24008
+  },
+  {
+   "year": 2012,
+   "races": 20,
+   "laps": 25343
+  },
+  {
+   "year": 2013,
+   "races": 19,
+   "laps": 22779
+  },
+  {
+   "year": 2014,
+   "races": 19,
+   "laps": 21021
+  },
+  {
+   "year": 2015,
+   "races": 19,
+   "laps": 19855
+  },
+  {
+   "year": 2016,
+   "races": 21,
+   "laps": 24513
+  },
+  {
+   "year": 2017,
+   "races": 20,
+   "laps": 20307
+  },
+  {
+   "year": 2018,
+   "races": 21,
+   "laps": 22246
+  },
+  {
+   "year": 2019,
+   "races": 21,
+   "laps": 23625
+  },
+  {
+   "year": 2020,
+   "races": 17,
+   "laps": 18400
+  },
+  {
+   "year": 2021,
+   "races": 22,
+   "laps": 23688
+  },
+  {
+   "year": 2022,
+   "races": 22,
+   "laps": 23529
+  },
+  {
+   "year": 2023,
+   "races": 22,
+   "laps": 24386
+  },
+  {
+   "year": 2024,
+   "races": 24,
+   "laps": 26574
+  }
+ ],
+ "nationality": [
+  {
+   "nationality": "German",
+   "wins": 158,
+   "laps_led": 9620,
+   "drivers": 13
+  },
+  {
+   "nationality": "British",
+   "wins": 152,
+   "laps_led": 8320,
+   "drivers": 18
+  },
+  {
+   "nationality": "Dutch",
+   "wins": 63,
+   "laps_led": 3418,
+   "drivers": 6
+  },
+  {
+   "nationality": "Finnish",
+   "wins": 52,
+   "laps_led": 3551,
+   "drivers": 5
+  },
+  {
+   "nationality": "Spanish",
+   "wins": 36,
+   "laps_led": 2073,
+   "drivers": 6
+  },
+  {
+   "nationality": "Brazilian",
+   "wins": 22,
+   "laps_led": 1818,
+   "drivers": 15
+  },
+  {
+   "nationality": "Australian",
+   "wins": 19,
+   "laps_led": 1075,
+   "drivers": 4
+  },
+  {
+   "nationality": "Canadian",
+   "wins": 11,
+   "laps_led": 665,
+   "drivers": 3
+  },
+  {
+   "nationality": "Monegasque",
+   "wins": 8,
+   "laps_led": 830,
+   "drivers": 1
+  },
+  {
+   "nationality": "Colombian",
+   "wins": 7,
+   "laps_led": 605,
+   "drivers": 1
+  }
+ ],
+ "team_family": [
+  {
+   "team": "Ferrari",
+   "wins": 144,
+   "laps_led": 8925,
+   "driver_races": 1053,
+   "podiums": 451,
+   "win_rate": 13.7
+  },
+  {
+   "team": "Mercedes",
+   "wins": 128,
+   "laps_led": 7264,
+   "driver_races": 1051,
+   "podiums": 318,
+   "win_rate": 12.2
+  },
+  {
+   "team": "Red Bull",
+   "wins": 123,
+   "laps_led": 7133,
+   "driver_races": 1016,
+   "podiums": 299,
+   "win_rate": 12.1
+  },
+  {
+   "team": "McLaren",
+   "wins": 85,
+   "laps_led": 5419,
+   "driver_races": 1054,
+   "podiums": 272,
+   "win_rate": 8.1
+  },
+  {
+   "team": "Williams",
+   "wins": 31,
+   "laps_led": 2081,
+   "driver_races": 1051,
+   "podiums": 110,
+   "win_rate": 2.9
+  },
+  {
+   "team": "Alpine",
+   "wins": 24,
+   "laps_led": 1732,
+   "driver_races": 1050,
+   "podiums": 117,
+   "win_rate": 2.3
+  },
+  {
+   "team": "Aston Martin",
+   "wins": 5,
+   "laps_led": 247,
+   "driver_races": 1035,
+   "podiums": 39,
+   "win_rate": 0.5
+  },
+  {
+   "team": "VCARB",
+   "wins": 2,
+   "laps_led": 87,
+   "driver_races": 1032,
+   "podiums": 5,
+   "win_rate": 0.2
+  },
+  {
+   "team": "Defunct",
+   "wins": 1,
+   "laps_led": 181,
+   "driver_races": 1289,
+   "podiums": 19,
+   "win_rate": 0.1
+  },
+  {
+   "team": "Sauber",
+   "wins": 1,
+   "laps_led": 127,
+   "driver_races": 1045,
+   "podiums": 27,
+   "win_rate": 0.1
+  },
+  {
+   "team": "Haas",
+   "wins": 0,
+   "laps_led": 0,
+   "driver_races": 365,
+   "podiums": 0,
+   "win_rate": 0.0
+  }
+ ]
+}
