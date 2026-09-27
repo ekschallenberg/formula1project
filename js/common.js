@@ -35,7 +35,8 @@ export function fmtLap(seconds, digits = 3) {
   if (seconds == null || Number.isNaN(seconds)) return "–";
   const m = Math.floor(seconds / 60);
   const s = seconds - m * 60;
-  return `${m}:${s.toFixed(digits).padStart(digits + 3, "0")}`;
+  // seconds part is always two digits before the decimal point: "1:05.2", "1:28"
+  return `${m}:${s.toFixed(digits).padStart(digits ? digits + 3 : 2, "0")}`;
 }
 
 export function applyChartDefaults(Chart) {

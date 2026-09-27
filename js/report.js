@@ -44,8 +44,9 @@ function bar(id, labels, data, { colors, horizontal = false, fmt = fmtInt, yLabe
   });
 }
 
-function line(id, labels, data, { color = F1_RED, fmt = fmt1, min, max, tickFmt } = {}) {
+function line(id, labels, data, { color = F1_RED, fmt = fmt1, min, max, tickFmt, plugins = [] } = {}) {
   return new Chart(document.getElementById(id), {
+    plugins,
     type: "line",
     data: { labels, datasets: [{ data, borderColor: color, backgroundColor: color, pointBackgroundColor: color, spanGaps: false }] },
     options: {
@@ -119,14 +120,52 @@ async function main() {
     return ` ${fmt1(d.gains_per_race)} per race (${fmtInt(d.track_gains)} over ${d.races} races)`;
   };
 
-  // 6. Monaco fastest lap; a gap for 2020 (no race)
+  // 6. Monaco fastest lap; a gap for 2020 (no race). Laps slower than the top of the scale
+  // (1997, a wet race) are drawn as a labelled marker pinned to the top edge instead.
   const d6 = r.monaco;
+  const MAX6 = 88;
   const years6 = [];
   for (let y = d6[0].year; y <= d6[d6.length - 1].year; y++) years6.push(y);
   const byYear = new Map(d6.map((d) => [d.year, d.best_s]));
-  line("c6", years6, years6.map((y) => byYear.get(y) ?? null), {
-    color: ACADEMY, fmt: (v) => fmtLap(v), tickFmt: (v) => fmtLap(v, 0), min: 70, max: 88,
+  const offScale = (y) => byYear.has(y) && byYear.get(y) > MAX6;
+  const offScaleLabels = {
+    id: "offScaleLabels",
+    afterDatasetsDraw(chart) {
+      const { ctx } = chart;
+      const meta = chart.getDatasetMeta(1);
+      ctx.save();
+      ctx.font = '600 13px "Titillium Web", "Segoe UI", system-ui, sans-serif';
+      ctx.fillStyle = "#F2F2F5";
+      ctx.textBaseline = "middle";
+      meta.data.forEach((pt, i) => {
+        const y = years6[i];
+        if (!offScale(y)) return;
+        ctx.fillText(`${y} (wet): ${fmtLap(byYear.get(y), 1)} ↑`, pt.x + 12, pt.y + 4);
+      });
+      ctx.restore();
+    },
+  };
+  const c6 = line("c6", years6, years6.map((y) => (offScale(y) ? null : byYear.get(y) ?? null)), {
+    color: ACADEMY, fmt: (v) => fmtLap(v), tickFmt: (v) => fmtLap(v, 0), min: 70, max: MAX6,
+    plugins: [offScaleLabels],
   });
+  c6.data.datasets.push({
+    data: years6.map((y) => (offScale(y) ? MAX6 : null)),
+    showLine: false,
+    pointStyle: "triangle",
+    pointRadius: 8,
+    pointHoverRadius: 10,
+    pointBackgroundColor: ACADEMY,
+    pointBorderColor: "#fff",
+    pointBorderWidth: 1.5,
+    clip: false,
+  });
+  c6.options.layout = { padding: { top: 12 } };
+  c6.options.plugins.tooltip.callbacks.label = (c) => {
+    const actual = byYear.get(years6[c.dataIndex]);
+    return c.datasetIndex === 1 ? ` ${fmtLap(actual)} (wet race, off the scale)` : " " + fmtLap(actual);
+  };
+  c6.update();
 
   // 7. Races per season
   const d7 = r.calendar;
