@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>F1 Pit Wall Dashboard</title>
+  <meta name="description" content="Filter 11,041 Formula 1 driver-race results from 1996 to 2024 and compare wins, laps led, finish rates and lap times.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 54 22" aria-hidden="true">
+        <polygon points="10,0 54,0 46,6 2,6" fill="#FC1F04"/>
+        <polygon points="7,8 40,8 32,14 0,14" fill="#FC1F04"/>
+        <polygon points="5,16 26,16 18,22 -2,22" fill="#FC1F04"/>
+      </svg>
+      <span class="brand-text">Lights Out Data</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Report</a>
+      <a href="dashboard.html" aria-current="page">Dashboard</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header class="dash-head">
+    <h1>Pit Wall Dashboard</h1>
+    <p>
+      Every driver in every race from 1996 to 2024: 11,041 driver-race results built from 589,081 laps.
+      Filter the field, pick a measure and a breakdown, and every number, chart and table row below is recalculated in your browser.
+    </p>
+  </header>
+
+  <section class="card" aria-label="Filters and switches">
+    <div class="checker" style="--c: var(--f1red); --sq: 6px"></div>
+    <div class="controls">
+      <div class="filters">
+        <div class="field"><label for="f-from">Season from</label><select id="f-from"></select></div>
+        <div class="field"><label for="f-to">Season to</label><select id="f-to"></select></div>
+        <div class="field"><label for="f-team">Team lineage</label><select id="f-team"></select></div>
+        <div class="field"><label for="f-cons">Constructor</label><select id="f-cons"></select></div>
+        <div class="field"><label for="f-driver">Driver</label><select id="f-driver"></select></div>
+        <div class="field"><label for="f-nationality">Nationality</label><select id="f-nationality"></select></div>
+        <div class="field"><label for="f-race">Grand Prix</label><select id="f-race"></select></div>
+      </div>
+      <div class="switches">
+        <div class="field">
+          <label for="measure">Measure</label>
+          <select id="measure"></select>
+        </div>
+        <div class="field">
+          <label id="breakdown-label">Break down by</label>
+          <div class="seg" id="breakdown" role="group" aria-labelledby="breakdown-label"></div>
+        </div>
+        <button class="btn ghost reset" id="reset" type="button">Reset all filters</button>
+      </div>
+      <div class="status" id="status" aria-live="polite">Loading data…</div>
+    </div>
+  </section>
+
+  <section class="kpis" id="kpis" aria-label="Summary numbers"></section>
+
+  <div id="dash-body">
+    <div class="grid-2">
+      <section class="card">
+        <div class="checker" style="--c: var(--ferrari); --sq: 6px"></div>
+        <div class="card-body">
+          <h3 id="t1">By season</h3>
+          <div class="chart-box"><canvas id="c1" role="img" aria-label="Selected measure by season"></canvas></div>
+        </div>
+      </section>
+      <section class="card">
+        <div class="checker" style="--c: var(--mercedes); --sq: 6px"></div>
+        <div class="card-body">
+          <h3 id="t2">By breakdown</h3>
+          <div class="chart-box"><canvas id="c2" role="img" aria-label="Selected measure by breakdown group"></canvas></div>
+        </div>
+      </section>
+      <section class="card">
+        <div class="checker" style="--c: var(--mclaren); --sq: 6px"></div>
+        <div class="card-body">
+          <h3 id="t3">Top groups by season</h3>
+          <div class="legend" id="legend3"></div>
+          <div class="chart-box"><canvas id="c3" role="img" aria-label="Selected measure by season for the top six groups"></canvas></div>
+        </div>
+      </section>
+      <section class="card">
+        <div class="checker" style="--c: var(--vcarb); --sq: 6px"></div>
+        <div class="card-body">
+          <h3 id="t4">By position after lap 1</h3>
+          <div class="chart-box"><canvas id="c4" role="img" aria-label="Selected measure by position at the end of lap 1"></canvas></div>
+        </div>
+      </section>
+    </div>
+
+    <section class="card table-card">
+      <div class="checker" style="--c: var(--f1grey); --sq: 6px"></div>
+      <div class="card-body">
+        <h3 id="t5">Numbers behind the view</h3>
+        <div class="table-scroll">
+          <table id="table"><thead></thead><tbody></tbody></table>
+        </div>
+        <p class="chart-note">
+          Click a column header to sort. The first row totals everything in the current view.
+          Ranked charts only show rates and averages for groups with at least 10 entries (when any group has that many).
+          All definitions are in the <a href="index.html#about">About the data</a> section of the report.
+        </p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>Colour palette from the F1 team-colours poster designed by @Leighrule_1459.</p>
+  <p>Data: Ergast Motor Racing database · Built with HTML, CSS, JavaScript and Chart.js.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

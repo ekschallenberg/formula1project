@@ -230,8 +230,9 @@ footer p { margin: 4px 0; }
 .switches .reset { margin-left: auto; }
 .status { margin-top: 12px; font-size: 14px; color: var(--ink-3); }
 
-.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin: 18px 0; }
-.kpis .stat-value { font-size: 38px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 12px; margin: 18px 0; }
+.kpis .card-body { padding: 12px 12px 14px; }
+.kpis .stat-value { font-size: 32px; }
 .kpis .stat-sub { font-size: 13px; color: var(--ink-3); margin-top: 2px; }
 
 .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
