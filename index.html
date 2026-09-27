@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lights Out: 29 Seasons of F1, Lap by Lap</title>
+  <meta name="description" content="A lap-by-lap look at Formula 1 from 1996 to 2024: who led, who finished, how often places changed hands and how fast the cars went.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 54 22" aria-hidden="true">
+        <polygon points="10,0 54,0 46,6 2,6" fill="#FC1F04"/>
+        <polygon points="7,8 40,8 32,14 0,14" fill="#FC1F04"/>
+        <polygon points="5,16 26,16 18,22 -2,22" fill="#FC1F04"/>
+      </svg>
+      <span class="brand-text">Lights Out Data</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" aria-current="page">Report</a>
+      <a href="dashboard.html">Dashboard</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Formula 1 · 1996–2024 · 589,081 laps</div>
+    <h1>Lights Out: 29 Seasons of <span>F1</span>, Lap by Lap</h1>
+    <!-- TODO: replace with your name -->
+    <p class="byline">By <strong>[Your Name]</strong> · Financial Data Analytics · Data Website Project</p>
+    <p class="summary">
+      This report studies every timed lap of every Formula 1 World Championship race from 1996 through 2024:
+      589,081 laps across 544 Grands Prix, run by 143 drivers for 43 constructors. Each lap records who drove it,
+      for which team, their running position at the end of the lap and the lap time. The data shows that
+      F1 is ruled by eras. One team led more than 80% of all laps in five different seasons, and Lewis Hamilton alone led one lap in every six.
+      Whoever leads after lap 1 wins more than half the time. Along the way, the sport changed shape: starters went from finishing
+      57% of the time to 93%, the calendar grew from 16 races to 24, and rule changes such as DRS moved the number of on-track place changes
+      far more than anything the drivers did.
+    </p>
+
+    <div class="stats" id="headline"></div>
+  </header>
+
+  <section class="section card" id="s1">
+    <div class="checker" style="--c: var(--mercedes)"></div>
+    <div class="card-body">
+      <div class="section-num">Lap 01 · Laps led</div>
+      <h2>Lewis Hamilton led 5,487 laps, one in every six raced since 1996</h2>
+      <p>
+        Every race lap has exactly one leader, so the 544 races in the data contain <span class="hl">33,196 laps led</span>.
+        Lewis Hamilton led <span class="hl">5,487</span> of them (<span class="hl">16.5%</span>), 1,550 more than Michael Schumacher
+        (3,937), even though Schumacher's first five championship seasons fall before this data begins.
+      </p>
+      <p>
+        Leading is concentrated at the very top. Hamilton, Schumacher, Sebastian Vettel (3,501) and Max Verstappen (3,418) together
+        led 16,343 laps, or <span class="hl">49.2%</span> of all laps raced in 29 seasons. Verstappen reached his total in ten
+        seasons (2015–2024), and 3,418 laps already puts him fourth.
+      </p>
+      <div class="chart-title">Laps led, top 10 drivers, 1996–2024</div>
+      <div class="chart-box"><canvas id="c1" role="img" aria-label="Bar chart of laps led by the top ten drivers"></canvas></div>
+    </div>
+  </section>
+
+  <section class="section card" id="s2">
+    <div class="checker" style="--c: var(--redbull)"></div>
+    <div class="card-body">
+      <div class="section-num">Lap 02 · Dominance</div>
+      <h2>Red Bull's 2023 season was the most one-sided in 29 years: 86.7% of laps led</h2>
+      <p>
+        For each season, the chart shows the constructor that led the most laps and its share of that season's laps.
+        The seasons run in clear eras: Williams (1996–97), McLaren (1998–99), Ferrari (2000–2004), Red Bull (2010–2013),
+        Mercedes (2014–2020) and Red Bull again (2021–2024).
+      </p>
+      <p>
+        Red Bull led <span class="hl">1,149 of 1,325 laps in 2023 (86.7%)</span>, just ahead of Mercedes in 2014
+        (<span class="hl">980 laps, 86.3%</span>) and 2016 (83.2%). The closest seasons were 2012, when Red Bull led only 36.4%,
+        and 2003, when Ferrari led 37.6%. Mercedes topped the table for seven straight years, the longest run in the data.
+      </p>
+      <div class="chart-title">Share of the season's laps led by the top constructor (%)</div>
+      <div class="legend" id="legend2"></div>
+      <div class="chart-box"><canvas id="c2" role="img" aria-label="Bar chart of the top constructor's share of laps led each season"></canvas></div>
+      <p class="chart-note">Bars are coloured by team lineage: Brawn's 2009 bar is Mercedes teal because Brawn became Mercedes.</p>
+    </div>
+  </section>
+
+  <section class="section card" id="s3">
+    <div class="checker" style="--c: var(--ferrari)"></div>
+    <div class="card-body">
+      <div class="section-num">Lap 03 · The start</div>
+      <h2>The leader after lap 1 goes on to win 55% of races</h2>
+      <p>
+        The driver in first place at the end of lap 1 won <span class="hl">301 of 544 races (55.3%)</span>.
+        Second place after lap 1 won 23.0% of the time, and third place 9.9%. From fourth place on, the odds collapse:
+        only <span class="hl">64 races (11.8%)</span> were won by a driver running fourth or lower after the first lap,
+        and just 8 by a driver outside the top 10.
+      </p>
+      <p>
+        Lap 1 position is used instead of grid position because the data records positions at the end of each lap. It already includes
+        the start and the first corners, where many races are decided.
+      </p>
+      <div class="chart-title">Win rate by position at the end of lap 1 (%)</div>
+      <div class="chart-box"><canvas id="c3" role="img" aria-label="Bar chart of win rate by lap 1 position"></canvas></div>
+    </div>
+  </section>
+
+  <section class="section card" id="s4">
+    <div class="checker" style="--c: var(--sauber)"></div>
+    <div class="card-body">
+      <div class="section-num">Lap 04 · Reliability</div>
+      <h2>Finishing became the norm: 57% of starters were classified in 1996, 93% in 2024</h2>
+      <p>
+        A driver is classified when they complete at least 90% of the winner's laps (the FIA rule). In 1996 only
+        <span class="hl">176 of 310 starts (56.8%)</span> were classified. By 2024 that rose to
+        <span class="hl">432 of 465 (92.9%)</span>. The rate climbed steadily through the early 2000s and passed 90% for the first
+        time in 2021 (91.6%).
+      </p>
+      <p>
+        The biggest single jump came in 2004–2005 (from 69.7% in 2003 to 76.4% and then 80.0%), when rules started forcing engines to last a
+        whole race weekend and then two. Over all 29 seasons, 79.4% of starts ended classified.
+      </p>
+      <div class="chart-title">Classified finishers as a share of starters (%)</div>
+      <div class="chart-box"><canvas id="c4" role="img" aria-label="Line chart of finish rate by season"></canvas></div>
+    </div>
+  </section>
+
+  <section class="section card" id="s5">
+    <div class="checker" style="--c: var(--vcarb)"></div>
+    <div class="card-body">
+      <div class="section-num">Lap 05 · Racing</div>
+      <h2>DRS and fast-wearing tyres made 2011–2013 the busiest era for changes of position</h2>
+      <p>
+        Counting every place a driver gains from one lap to the next (the start is excluded) gives a measure of how much the order changes
+        during a race. From 1996 to 2010 a race averaged <span class="hl">149 places gained</span>. In 2011 the sport added DRS
+        (a rear wing that opens on straights) and Pirelli's deliberately fast-wearing tyres. The average jumped to
+        <span class="hl">248 per race in 2011–2013</span>, peaking at 253.8 in 2012.
+      </p>
+      <p>
+        The count dropped to its lowest point, <span class="hl">108.4 in 2017</span>, the first year of wider, high-downforce cars that
+        struggle to follow each other. It recovered to 186.4 in 2023 under the 2022 ground-effect rules.
+        This count includes places swapped during pit stops, so it measures how much the order changes rather than strictly overtakes.
+      </p>
+      <div class="chart-title">Places gained on track per race (laps 2 to finish)</div>
+      <div class="chart-box"><canvas id="c5" role="img" aria-label="Bar chart of places gained per race by season"></canvas></div>
+    </div>
+  </section>
+
+  <section class="section card" id="s6">
+    <div class="checker" style="--c: var(--academy)"></div>
+    <div class="card-body">
+      <div class="section-num">Lap 06 · Speed</div>
+      <h2>At Monaco, 2014's hybrid cars were 4 seconds a lap slower than 2004's V10s</h2>
+      <p>
+        Monaco's street circuit has barely changed since 1996, which makes it a good stopwatch for the cars themselves.
+        The fastest race lap fell from 1:25.205 in 1996 to <span class="hl">1:14.439 in 2004</span>, the peak of the V10 era.
+        The 2014 switch to 1.6-litre hybrid engines and narrower cars pushed it back up to <span class="hl">1:18.479</span>,
+        4.04 seconds slower.
+      </p>
+      <p>
+        The wider 2017 cars won the time back straight away (1:14.820), and the fastest Monaco race lap in the data is
+        <span class="hl">1:12.909, set in 2021</span>. Race laps depend on fuel load, tyres and weather, so wet races stand out: 1997's
+        fastest lap was 1:53.315 and is left off the scale. Monaco was not held in 2020.
+      </p>
+      <div class="chart-title">Fastest race lap at the Monaco Grand Prix (m:ss)</div>
+      <div class="chart-box"><canvas id="c6" role="img" aria-label="Line chart of Monaco fastest race lap by season"></canvas></div>
+      <p class="chart-note">1997 (wet race, 1:53.315) is above the top of the scale. Purple marks the fastest lap, as on F1 timing screens.</p>
+    </div>
+  </section>
+
+  <section class="section card" id="s7">
+    <div class="checker" style="--c: var(--mclaren)"></div>
+    <div class="card-body">
+      <div class="section-num">Lap 07 · The calendar</div>
+      <h2>The season grew from 16 races to 24, and the field ran 84% more laps</h2>
+      <p>
+        There were <span class="hl">16 Grands Prix in 1996</span> and <span class="hl">24 in 2024</span>, a record.
+        Most of the growth came after 2015 (19 races), with new rounds in Azerbaijan, Saudi Arabia, Qatar,
+        Miami and Las Vegas. The 2020 season was cut to 17 races by the pandemic.
+      </p>
+      <p>
+        More races and fuller finishing fields add up: the drivers together completed <span class="hl">14,431 laps in 1996</span>
+        and <span class="hl">26,574 in 2024</span>, 84.1% more.
+      </p>
+      <div class="chart-title">Grands Prix per season</div>
+      <div class="chart-box"><canvas id="c7" role="img" aria-label="Bar chart of races per season"></canvas></div>
+    </div>
+  </section>
+
+  <section class="section card" id="s8">
+    <div class="checker" style="--c: var(--alpine)"></div>
+    <div class="card-body">
+      <div class="section-num">Lap 08 · Nationality</div>
+      <h2>German and British drivers won 57% of all races</h2>
+      <p>
+        By the nationality of the winning driver, Germany leads with <span class="hl">158 wins</span> (13 drivers, led by
+        Schumacher and Vettel) and Britain follows with <span class="hl">152</span> (18 drivers, led by Hamilton).
+        Together they won 310 of the 544 races (57.0%).
+      </p>
+      <p>
+        The Netherlands is third with 63 wins, all by one driver: Max Verstappen. Five other Dutch drivers raced in this period without winning.
+        Finland's 52 wins came from four drivers: Räikkönen (21), Häkkinen (20), Bottas (10) and Kovalainen (1).
+      </p>
+      <div class="chart-title">Race wins by driver nationality, top 10</div>
+      <div class="chart-box"><canvas id="c8" role="img" aria-label="Bar chart of wins by nationality"></canvas></div>
+    </div>
+  </section>
+
+  <section class="section card" id="s9">
+    <div class="checker" style="--c: var(--f1grey)"></div>
+    <div class="card-body">
+      <div class="section-num">Lap 09 · Team lineage</div>
+      <h2>Four team lineages won 88% of races; Haas has yet to win one</h2>
+      <p>
+        F1 teams change names when they change owners, so the report groups each constructor under the 2024 team it became. For example,
+        Tyrrell → BAR → Honda → Brawn → Mercedes, and Stewart → Jaguar → Red Bull. On that basis Ferrari leads with
+        <span class="hl">144 wins</span>, followed by the Mercedes lineage (<span class="hl">128</span>) and the Red Bull lineage
+        (<span class="hl">123</span>).
+      </p>
+      <p>
+        Add McLaren's 85 and those four lineages account for <span class="hl">480 of 544 wins (88.2%)</span>.
+        The Enstone team (Benetton → Renault → Lotus → Alpine) won 24 and Williams 31, most of them in the 1990s.
+        Haas has 365 race starts since 2016 and has never led a lap.
+      </p>
+      <div class="chart-title">Race wins by team lineage, 1996–2024</div>
+      <div class="chart-box"><canvas id="c9" role="img" aria-label="Bar chart of wins by team lineage"></canvas></div>
+    </div>
+  </section>
+
+  <section class="section card about" id="about">
+    <div class="checker" style="--c: #fff"></div>
+    <div class="card-body">
+      <div class="section-num">Pit wall · About the data</div>
+      <h2>Where the numbers come from</h2>
+      <dl>
+        <dt>Source</dt>
+        <dd>
+          <code>data/formula1file.xlsx</code>, sheet <code>f1_lap_times_panel</code>. It is compiled from the Ergast Motor
+          Racing database (lap times, races, drivers and constructors tables; the IDs follow Ergast's numbering), which has timed
+          laps for every championship race from 1996 on.
+        </dd>
+        <dt>One row</dt>
+        <dd>
+          One driver on one lap of one race: 589,081 rows and 14 columns (season, round, race, date, driver, code, nationality,
+          constructor, lap number, position at the end of the lap and lap time). There are 544 races and 143 drivers over 29 seasons.
+        </dd>
+        <dt>Rows dropped</dt>
+        <dd>
+          None. The file has no missing values and no duplicate driver-laps. It only holds laps that were completed, so a driver who retired
+          before finishing lap 1 does not appear. Very long laps (red flags, repairs, pit stops) are kept. They affect only lap-time
+          measures, which use the fastest or median lap.
+        </dd>
+        <dt>Driver-race table</dt>
+        <dd>
+          <code>scripts/build_data.py</code> rolls the laps up to one row per driver per race (11,041 rows,
+          <code>data/driver_races.csv</code>). The dashboard loads this table, and every report figure is computed from it
+          (<code>data/report_data.json</code>).
+        </dd>
+        <dt>Laps led</dt>
+        <dd>Laps completed in position 1. Each race lap has one leader, so all laps led add up to 33,196 race laps.</dd>
+        <dt>Share of laps led</dt>
+        <dd>Laps led ÷ race laps in the races entered. For a season, this is laps led ÷ all laps of that season.</dd>
+        <dt>Win</dt>
+        <dd>
+          In position 1 at the end of the race's final lap: first across the line. Post-race penalties are not in the data, so two
+          official results differ: Vettel is counted for Canada 2019 (Hamilton was awarded it) and Russell for Belgium 2024
+          (Hamilton was awarded it after Russell's disqualification).
+        </dd>
+        <dt>Classified / finish rate</dt>
+        <dd>Completed at least 90% of the race's laps, rounded down. Finish rate = classified ÷ driver-race entries.</dd>
+        <dt>Podium</dt>
+        <dd>Classified and in the top 3 on the last lap completed.</dd>
+        <dt>Win rate</dt>
+        <dd>Wins ÷ driver-race entries.</dd>
+        <dt>Lap 1 position</dt>
+        <dd>Position at the end of lap 1 (the data has no starting grid).</dd>
+        <dt>Places gained on track</dt>
+        <dd>
+          For each lap from lap 2 on, the positions a driver moved up since the previous lap (drops count as zero), summed. Per race =
+          the total ÷ the number of races. Includes places changed during pit stops.
+        </dd>
+        <dt>Fastest / median lap</dt>
+        <dd>The minimum of all a driver's lap times, and the median lap of each driver-race.</dd>
+        <dt>Team lineage</dt>
+        <dd>
+          Ferrari; McLaren; Williams; Red Bull (Stewart, Jaguar); Mercedes (Tyrrell, BAR, Honda, Brawn); Aston Martin
+          (Jordan, MF1, Spyker, Force India, Racing Point); Alpine (Benetton, Renault, Lotus F1); Haas; Sauber (BMW Sauber,
+          Alfa Romeo); VCARB (Minardi, Toro Rosso, AlphaTauri, RB). Teams with no 2024 successor (Ligier, Prost, Footwork, Arrows,
+          Forti, Toyota, Super Aguri, Lotus 2010–11, Caterham, Virgin, Marussia, Manor, HRT) are grouped as Defunct.
+        </dd>
+      </dl>
+    </div>
+  </section>
+
+  <div class="cta"><a class="btn" href="dashboard.html">Open the dashboard →</a></div>
+</main>
+
+<footer>
+  <p>Colour palette from the F1 team-colours poster designed by @Leighrule_1459.</p>
+  <p>Data: Ergast Motor Racing database · Built with HTML, CSS, JavaScript and Chart.js.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script type="module" src="js/report.js"></script>
+</body>
+</html>
