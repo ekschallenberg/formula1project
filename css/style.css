@@ -71,7 +71,7 @@ h1, h2, h3, .display {
 .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 60px; }
 .brand { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; }
 .brand-mark { width: 54px; height: 22px; display: block; }
-.brand-text { font-family: var(--display); font-size: 26px; letter-spacing: 0.04em; }
+.brand-text { font-family: var(--display); font-size: 26px; letter-spacing: 0.04em; white-space: nowrap; }
 .nav-links { display: flex; gap: 4px; }
 .nav-links a {
   font-family: var(--display);
@@ -264,6 +264,7 @@ tbody tr:hover td { background: var(--panel-2); }
 .empty { padding: 40px 0; text-align: center; color: var(--ink-2); }
 
 @media (max-width: 820px) {
+  .brand-text { font-size: 21px; }
   .grid-2 { grid-template-columns: 1fr; }
   .section .card-body { padding: 20px 18px 22px; }
   .about dl { grid-template-columns: 1fr; gap: 2px; }
@@ -271,9 +272,11 @@ tbody tr:hover td { background: var(--panel-2); }
   .chart-box, .chart-box.tall { height: 300px; }
   .switches .reset { margin-left: 0; }
 }
+@media (max-width: 620px) {
+  .brand-text { display: none; }
+}
 @media (max-width: 520px) {
   body { font-size: 16px; }
-  .brand-text { display: none; }
   .nav-links a { font-size: 18px; padding: 6px 9px; }
   .stat-value { font-size: 36px; }
 }
