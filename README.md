@@ -7,6 +7,8 @@ A two-page data website about every timed lap of every Formula 1 World Champions
   constructor, driver, nationality and Grand Prix, switch the measure and the breakdown, and see every number update.
   A spinning globe marks every circuit in the current view and zooms in on the circuit when you pick a Grand Prix,
   with an outline of the track beside it.
+- **Music**: both pages have a small player in the corner that plays "Lights Out", an original race-day theme
+  synthesised live in the browser (no audio files). It never starts on its own.
 
 Live site: `https://ekschallenberg.github.io/formula1project/` (GitHub Pages, served from the `main` branch).
 
@@ -41,6 +43,7 @@ defines every measure (laps led, win, classified, finish rate, places gained, te
 | `js/dashboard.js` | Wires the dashboard controls to `js/metrics.js` and redraws the numbers, globe, charts and table. |
 | `js/globe.js` | The dashboard globe (D3 orthographic projection): spins with a dot per circuit in view, can be dragged to turn it, zooms to the circuit when one Grand Prix is selected (clicking elsewhere on the globe zooms back out), and selects a Grand Prix when you click its dot. |
 | `js/venues.js` | Circuit names and coordinates, which circuit hosted each Grand Prix in each season (several Grands Prix moved between circuits), and each circuit's track outline id. |
+| `js/music.js` | The music player on both pages and the song itself: an original theme composed as code and played with the Web Audio API (drums, bass, arpeggio, lead melody, pads and an engine-rev riser). Remembers volume and play state in the browser. |
 | `js/tracks.js` | Loads `data/f1-circuits.geojson` and draws a circuit's track outline for the dashboard's Grand Prix panel. |
 | `data/formula1file.xlsx` | The raw lap-by-lap data (source file). |
 | `data/driver_races.csv` | One row per driver per race (11,041 rows), built from the laps. The dashboard loads this file. |
