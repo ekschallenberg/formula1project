@@ -4,6 +4,7 @@ import { TEAM_COLORS, F1_RED, ACADEMY, CATEGORICAL, fmtInt, fmt1, fmtPct, fmtLap
 import { parseCSV, MEASURES, BREAKDOWNS, applyFilters, groupBy, rankGroups, raceLaps } from "./metrics.js";
 import { CIRCUITS, circuitFor } from "./venues.js";
 import { createGlobe } from "./globe.js";
+import { loadTracks, trackSVG } from "./tracks.js";
 
 applyChartDefaults(Chart);
 
@@ -21,6 +22,7 @@ const state = {};
 const charts = {};
 let tableSort = null; // { key, dir }
 let globe = null;
+let trackToken = 0; // ignores outline loads for a Grand Prix that is no longer selected
 
 // ---------- formatting ----------
 function fmtMeasure(key, v) {
@@ -385,9 +387,12 @@ function renderGlobe(rows) {
     html = `
       <div class="eyebrow">Grand Prix</div>
       <h3>${state.race}</h3>
+      <div class="track-box" id="track-main"></div>
+      <div class="track-cap" id="track-cap"></div>
       <ul>${circuits.map((c) => {
         const v = CIRCUITS[c.id];
-        return `<li><span>${v.name}<br><span class="sub">${v.city}, ${v.country} · ${yearSpans(c.years)}</span></span>
+        const mini = circuits.length > 1 ? `<span class="mini-track" data-track="${v.track || ""}" data-name="${v.name}"></span>` : "";
+        return `<li>${mini}<span class="grow">${v.name}<br><span class="sub">${v.city}, ${v.country} · ${yearSpans(c.years)}</span></span>
           <b>${n(c.years.length, "race")}</b></li>`;
       }).join("")}</ul>
       <p>${wins.length ? `Most wins in this view: ${wins.map(([d, k]) => `${d} (${k})`).join(", ")}.` : "No wins in this view."}
@@ -396,6 +401,29 @@ function renderGlobe(rows) {
       <p class="hint" style="margin-top:10px">Or click anywhere else on the globe to zoom back out.</p>`;
   }
   $("globe-info").innerHTML = html;
+  if (state.race) drawTracks(CIRCUITS[circuits[0].id]);
+}
+
+// Outline of the circuit the globe zooms to, plus small outlines when a Grand Prix used several.
+function drawTracks(focus) {
+  const token = ++trackToken;
+  loadTracks().then((tracks) => {
+    if (token !== trackToken) return;
+    const f = focus.track && tracks.get(focus.track);
+    $("track-main").innerHTML = f
+      ? trackSVG(f, 420, 210, { label: `Outline of ${focus.name}` })
+      : `<p class="track-missing">No track outline available for ${focus.name}.</p>`;
+    $("track-cap").textContent = f
+      ? `${focus.name} · ${(f.properties.length / 1000).toFixed(3)} km · current layout`
+      : "";
+    for (const el of document.querySelectorAll("#globe-info .mini-track")) {
+      const m = el.dataset.track && tracks.get(el.dataset.track);
+      el.innerHTML = m ? trackSVG(m, 54, 38, { pad: 4, stroke: 2, label: `Outline of ${el.dataset.name}` }) : "";
+    }
+  }).catch((err) => {
+    console.error("Track outlines unavailable:", err);
+    if (token === trackToken) $("track-main").style.display = "none";
+  });
 }
 
 // ---------- main loop ----------

@@ -67,5 +67,11 @@ for (const r of new Map(rows.map((r) => [r.raceKey, r])).values()) {
   eq(`circuit for ${r.year} ${r.race}`, Boolean(id && CIRCUITS[id]), true);
 }
 
+// Every circuit's track outline id must exist in data/f1-circuits.geojson.
+const trackIds = new Set(JSON.parse(readFileSync("data/f1-circuits.geojson", "utf8")).features.map((f) => f.properties.id));
+for (const [id, c] of Object.entries(CIRCUITS)) {
+  if (c.track) eq(`track outline for ${id}`, trackIds.has(c.track), true);
+}
+
 console.log(`${checks - failures}/${checks} checks agree`);
 process.exit(failures ? 1 : 0);
