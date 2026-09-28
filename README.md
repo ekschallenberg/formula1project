@@ -38,7 +38,7 @@ defines every measure (laps led, win, classified, finish rate, places gained, te
 | `js/report.js` | Reads `data/report_data.json` and draws the report's headline numbers and charts. |
 | `js/metrics.js` | The dashboard's calculations: CSV parsing, filters, the 14 measures and group ranking. It has no browser code, so Node can run it too. |
 | `js/dashboard.js` | Wires the dashboard controls to `js/metrics.js` and redraws the numbers, globe, charts and table. |
-| `js/globe.js` | The dashboard globe (D3 orthographic projection): spins with a dot per circuit in view, zooms to the circuit when one Grand Prix is selected, and selects a Grand Prix when you click its dot. |
+| `js/globe.js` | The dashboard globe (D3 orthographic projection): spins with a dot per circuit in view, can be dragged to turn it, zooms to the circuit when one Grand Prix is selected (clicking elsewhere on the globe zooms back out), and selects a Grand Prix when you click its dot. |
 | `js/venues.js` | Circuit names and coordinates, and which circuit hosted each Grand Prix in each season (several Grands Prix moved between circuits). |
 | `data/formula1file.xlsx` | The raw lap-by-lap data (source file). |
 | `data/driver_races.csv` | One row per driver per race (11,041 rows), built from the laps. The dashboard loads this file. |
