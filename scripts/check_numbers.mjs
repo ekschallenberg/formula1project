@@ -1,5 +1,6 @@
 // Check that the dashboard's calculations (js/metrics.js) reproduce every number in
-// data/report_data.json, which scripts/build_data.py computes with pandas.
+// data/report_data.json, which scripts/build_data.py computes with pandas, and that every
+// race has a circuit for the dashboard globe (js/venues.js).
 // Run from the repository root:  node scripts/check_numbers.mjs
 import { readFileSync } from "node:fs";
 import { parseCSV, MEASURES as M, applyFilters, groupBy, rankGroups, raceLaps } from "../js/metrics.js";
@@ -57,6 +58,13 @@ for (const d of report.nationality) eq(`wins ${d.nationality}`, M.wins.calc(view
 for (const d of report.team_family) {
   eq(`wins ${d.team}`, M.wins.calc(view({ team: d.team })), d.wins);
   eq(`win rate ${d.team}`, M.win_rate.calc(view({ team: d.team })), d.win_rate);
+}
+
+// Every race in the data must map to a circuit on the dashboard globe.
+const { circuitFor, CIRCUITS } = await import("../js/venues.js");
+for (const r of new Map(rows.map((r) => [r.raceKey, r])).values()) {
+  const id = circuitFor(r.race, r.year);
+  eq(`circuit for ${r.year} ${r.race}`, Boolean(id && CIRCUITS[id]), true);
 }
 
 console.log(`${checks - failures}/${checks} checks agree`);
