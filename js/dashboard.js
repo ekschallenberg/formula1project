@@ -377,7 +377,7 @@ function renderGlobe(rows) {
         return `<li><span><button type="button" class="linkish" data-race="${topName(c)}">${v.name}</button><br>
           <span class="sub">${v.city}, ${v.country}</span></span><b>${n(c.years.length, "race")}</b></li>`;
       }).join("")}</ul>
-      <p class="hint">Hover over a dot to see which Grands Prix were held there.</p>`;
+      <p class="hint">Drag the globe to turn it. Hover over a dot to see which Grands Prix were held there.</p>`;
   } else {
     const wins = [...groupBy(rows.filter((r) => r.win), "driver")].map(([d, g]) => [d, g.length])
       .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 3);
@@ -392,7 +392,8 @@ function renderGlobe(rows) {
       }).join("")}</ul>
       <p>${wins.length ? `Most wins in this view: ${wins.map(([d, k]) => `${d} (${k})`).join(", ")}.` : "No wins in this view."}
         Fastest race lap: ${fmtLap(best.best_ms / 1000)}, ${best.driver}, ${best.year}.</p>
-      <button type="button" class="btn ghost" data-race="">Show all Grands Prix</button>`;
+      <button type="button" class="btn ghost" data-race="">Show all Grands Prix</button>
+      <p class="hint" style="margin-top:10px">Or click anywhere else on the globe to zoom back out.</p>`;
   }
   $("globe-info").innerHTML = html;
 }

@@ -239,7 +239,11 @@ footer p { margin: 4px 0; }
 .globe-card { margin-bottom: 16px; }
 .globe-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: center; }
 .globe-box { width: 100%; max-width: 460px; aspect-ratio: 1; margin: 0 auto; }
-.globe-svg { width: 100%; height: 100%; display: block; }
+.globe-svg { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; user-select: none; }
+.globe-svg.dragging { cursor: grabbing; }
+.globe-svg.zoomed { cursor: zoom-out; }
+.globe-svg.zoomed.dragging { cursor: grabbing; }
+.globe-svg circle { cursor: pointer; }
 .globe-svg circle:hover { stroke-width: 2.5; }
 .globe-info h3 { font-size: 34px; margin: 0 0 4px; }
 .globe-info .eyebrow { font-family: var(--display); font-size: 16px; letter-spacing: 0.12em; color: var(--ink-3); }
