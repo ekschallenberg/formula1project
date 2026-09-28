@@ -68,6 +68,14 @@
   <section class="kpis" id="kpis" aria-label="Summary numbers"></section>
 
   <div id="dash-body">
+    <section class="card globe-card" aria-label="Where the races were held">
+      <div class="checker" style="--c: var(--academy); --sq: 6px"></div>
+      <div class="card-body globe-layout">
+        <div class="globe-box" id="globe"></div>
+        <div class="globe-info" id="globe-info" aria-live="polite"></div>
+      </div>
+    </section>
+
     <div class="grid-2">
       <section class="card">
         <div class="checker" style="--c: var(--ferrari); --sq: 6px"></div>
@@ -123,6 +131,8 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script type="module" src="js/dashboard.js"></script>
 </body>
 </html>

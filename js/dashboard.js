@@ -2,6 +2,8 @@
 // the summary numbers, four charts and the table on every change.
 import { TEAM_COLORS, F1_RED, ACADEMY, CATEGORICAL, fmtInt, fmt1, fmtPct, fmtLap, applyChartDefaults } from "./common.js";
 import { parseCSV, MEASURES, BREAKDOWNS, applyFilters, groupBy, rankGroups, raceLaps } from "./metrics.js";
+import { CIRCUITS, circuitFor } from "./venues.js";
+import { createGlobe } from "./globe.js";
 
 applyChartDefaults(Chart);
 
@@ -18,6 +20,7 @@ let GLOBAL_RANK = {}; // breakdown -> Map(name -> rank by entries), for stable c
 const state = {};
 const charts = {};
 let tableSort = null; // { key, dir }
+let globe = null;
 
 // ---------- formatting ----------
 function fmtMeasure(key, v) {
@@ -328,6 +331,72 @@ function onTableSort(e) {
   renderTable(rows, ctx);
 }
 
+// ---------- globe ----------
+// "1996, 1999–2007, 2016"
+function yearSpans(years) {
+  const ys = [...new Set(years)].sort((a, b) => a - b);
+  const out = [];
+  for (let i = 0; i < ys.length; i++) {
+    let j = i;
+    while (j + 1 < ys.length && ys[j + 1] === ys[j] + 1) j++;
+    out.push(i === j ? `${ys[i]}` : `${ys[i]}–${ys[j]}`);
+    i = j;
+  }
+  return out.join(", ");
+}
+
+function renderGlobe(rows) {
+  const races = new Map();
+  for (const r of rows) {
+    if (!races.has(r.raceKey)) races.set(r.raceKey, { race: r.race, year: r.year, circuit: circuitFor(r.race, r.year) });
+  }
+  const list = [...races.values()];
+  if (globe) globe.update(list, state.race);
+
+  const byCircuit = new Map();
+  for (const x of list) {
+    let c = byCircuit.get(x.circuit);
+    if (!c) byCircuit.set(x.circuit, (c = { id: x.circuit, years: [], names: new Map() }));
+    c.years.push(x.year);
+    c.names.set(x.race, (c.names.get(x.race) || 0) + 1);
+  }
+  const circuits = [...byCircuit.values()].sort((a, b) => b.years.length - a.years.length || Math.max(...b.years) - Math.max(...a.years));
+  const topName = (c) => [...c.names].sort((a, b) => b[1] - a[1])[0][0];
+  const n = (k, word) => `${fmtInt(k)} ${word}${k === 1 ? "" : "s"}`;
+  let html;
+
+  if (!state.race) {
+    const countries = new Set(circuits.map((c) => CIRCUITS[c.id].country));
+    html = `
+      <div class="eyebrow">Where they raced</div>
+      <h3>${n(circuits.length, "circuit")} in ${fmtInt(countries.size)} ${countries.size === 1 ? "country" : "countries"}</h3>
+      <p>${list.length === 1 ? "1 Grand Prix" : `${fmtInt(list.length)} Grands Prix`} in the current view, ${state.from}–${state.to}.
+        Bigger dots hosted more races. Click a dot or a circuit below to zoom in on its Grand Prix.</p>
+      <ul>${circuits.slice(0, 6).map((c) => {
+        const v = CIRCUITS[c.id];
+        return `<li><span><button type="button" class="linkish" data-race="${topName(c)}">${v.name}</button><br>
+          <span class="sub">${v.city}, ${v.country}</span></span><b>${n(c.years.length, "race")}</b></li>`;
+      }).join("")}</ul>
+      <p class="hint">Hover over a dot to see which Grands Prix were held there.</p>`;
+  } else {
+    const wins = [...groupBy(rows.filter((r) => r.win), "driver")].map(([d, g]) => [d, g.length])
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 3);
+    const best = rows.reduce((a, r) => (r.best_ms < a.best_ms ? r : a));
+    html = `
+      <div class="eyebrow">Grand Prix</div>
+      <h3>${state.race}</h3>
+      <ul>${circuits.map((c) => {
+        const v = CIRCUITS[c.id];
+        return `<li><span>${v.name}<br><span class="sub">${v.city}, ${v.country} · ${yearSpans(c.years)}</span></span>
+          <b>${n(c.years.length, "race")}</b></li>`;
+      }).join("")}</ul>
+      <p>${wins.length ? `Most wins in this view: ${wins.map(([d, k]) => `${d} (${k})`).join(", ")}.` : "No wins in this view."}
+        Fastest race lap: ${fmtLap(best.best_ms / 1000)}, ${best.driver}, ${best.year}.</p>
+      <button type="button" class="btn ghost" data-race="">Show all Grands Prix</button>`;
+  }
+  $("globe-info").innerHTML = html;
+}
+
 // ---------- main loop ----------
 // Laps-led share is measured against every race lap in the selected seasons and Grands Prix,
 // so the denominator ignores the team, constructor, driver and nationality filters.
@@ -349,8 +418,14 @@ function update() {
   renderKPIs(rows, ctx);
   $("dash-body").style.display = rows.length ? "" : "none";
   if (!rows.length) return;
+  renderGlobe(rows);
   updateCharts(rows, ctx, yearCtx);
   renderTable(rows, ctx);
+}
+
+function pickRace(name) {
+  state.race = name;
+  update();
 }
 
 async function main() {
@@ -370,6 +445,16 @@ async function main() {
   makeChart("c4", "bar");
   charts.c3.options.plugins.legend = { display: false };
   $("table").addEventListener("click", onTableSort);
+  $("globe-info").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-race]");
+    if (b) pickRace(b.dataset.race);
+  });
+  try {
+    globe = createGlobe($("globe"), { onPick: pickRace });
+  } catch (err) {
+    console.error("Globe unavailable:", err); // the rest of the dashboard still works
+    $("globe").style.display = "none";
+  }
   resetState();
   update();
 }

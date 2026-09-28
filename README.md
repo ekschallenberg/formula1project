@@ -5,6 +5,7 @@ A two-page data website about every timed lap of every Formula 1 World Champions
 - **Report** (`index.html`): nine findings, each with the numbers behind it and a chart, plus a section explaining the data.
 - **Dashboard** (`dashboard.html`): loads the data in the browser and lets you filter by season, team lineage,
   constructor, driver, nationality and Grand Prix, switch the measure and the breakdown, and see every number update.
+  A spinning globe marks every circuit in the current view and zooms in on the circuit when you pick a Grand Prix.
 
 Live site: `https://ekschallenberg.github.io/formula1project/` (GitHub Pages, served from the `main` branch).
 
@@ -31,17 +32,19 @@ defines every measure (laps led, win, classified, finish rate, places gained, te
 | File | What it does |
 |---|---|
 | `index.html` | Report page: title, summary, six headline numbers, nine findings with charts, and the about-the-data section. |
-| `dashboard.html` | Dashboard page: filters, measure and breakdown switches, seven summary numbers, four charts, a sortable table and a reset button. |
+| `dashboard.html` | Dashboard page: filters, measure and breakdown switches, seven summary numbers, a circuit globe, four charts, a sortable table and a reset button. |
 | `css/style.css` | Shared fonts, colours and layout for both pages (palette from the F1 team-colours poster by @Leighrule_1459). |
 | `js/common.js` | Shared team colours, number and lap-time formatting, and Chart.js styling. |
 | `js/report.js` | Reads `data/report_data.json` and draws the report's headline numbers and charts. |
 | `js/metrics.js` | The dashboard's calculations: CSV parsing, filters, the 14 measures and group ranking. It has no browser code, so Node can run it too. |
-| `js/dashboard.js` | Wires the dashboard controls to `js/metrics.js` and redraws the numbers, charts and table. |
+| `js/dashboard.js` | Wires the dashboard controls to `js/metrics.js` and redraws the numbers, globe, charts and table. |
+| `js/globe.js` | The dashboard globe (D3 orthographic projection): spins with a dot per circuit in view, zooms to the circuit when one Grand Prix is selected, and selects a Grand Prix when you click its dot. |
+| `js/venues.js` | Circuit names and coordinates, and which circuit hosted each Grand Prix in each season (several Grands Prix moved between circuits). |
 | `data/formula1file.xlsx` | The raw lap-by-lap data (source file). |
 | `data/driver_races.csv` | One row per driver per race (11,041 rows), built from the laps. The dashboard loads this file. |
 | `data/report_data.json` | Every number and chart series on the report page. |
 | `scripts/build_data.py` | Reads the spreadsheet, validates it and writes `driver_races.csv` and `report_data.json`. |
-| `scripts/check_numbers.mjs` | Runs the dashboard's own calculations in Node and checks they match all 289 figures in `report_data.json`. |
+| `scripts/check_numbers.mjs` | Runs the dashboard's own calculations in Node and checks they match all 289 figures in `report_data.json`, and that all 544 races map to a circuit. |
 | `requirements.txt` | Python packages for the build script. |
 | `.nojekyll` | Tells GitHub Pages to serve the files as they are, without Jekyll processing. |
 
@@ -50,7 +53,7 @@ defines every measure (laps led, win, classified, finish rate, places gained, te
 ```bash
 pip install -r requirements.txt
 python3 scripts/build_data.py      # about a minute: reads 589k rows from Excel
-node scripts/check_numbers.mjs     # expects "289/289 checks agree"
+node scripts/check_numbers.mjs     # expects "833/833 checks agree"
 ```
 
 ## Viewing locally
@@ -62,4 +65,5 @@ python3 -m http.server 8000
 # open http://localhost:8000/
 ```
 
-Chart.js 4.4.1 comes from jsDelivr, and the fonts (Bebas Neue, Titillium Web) come from Google Fonts.
+Chart.js 4.4.1, D3 7.9.0, topojson-client 3.1.0 and the world map (world-atlas 2.0.2, Natural Earth 1:110m)
+come from jsDelivr, and the fonts (Bebas Neue, Titillium Web) come from Google Fonts.
