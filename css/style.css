@@ -42,8 +42,18 @@ body {
   font-family: var(--body);
   font-size: 17px;
   line-height: 1.6;
-  /* the poster's backdrop: black at the top fading to full red at the bottom */
-  background: linear-gradient(180deg, #000 0%, #000 45%, #1E0002 65%, #680001 85%, #FE0000 100%);
+  /* The poster's backdrop, black at the top fading to red at the bottom, with soft red and
+     reddish-orange glows at staggered points down the sides. The glows are sized relative to
+     the page, so each page gets the same rhythm however long it is; the centre and the gaps
+     between glows stay dark. */
+  background:
+    radial-gradient(ellipse 45% 9% at 100% 6%, rgba(255, 77, 28, 0.20), transparent 70%),
+    radial-gradient(ellipse 40% 10% at 0% 22%, rgba(220, 0, 0, 0.24), transparent 70%),
+    radial-gradient(ellipse 45% 11% at 100% 40%, rgba(255, 90, 24, 0.24), transparent 70%),
+    radial-gradient(ellipse 45% 11% at 0% 57%, rgba(252, 31, 4, 0.30), transparent 70%),
+    radial-gradient(ellipse 50% 12% at 100% 74%, rgba(255, 77, 28, 0.34), transparent 70%),
+    linear-gradient(180deg, #000 0%, #030000 30%, #120001 50%, #3a0401 70%, #8a0c02 84%,
+      #E3180A 94%, #FF4D1C 100%);
 }
 
 a { color: var(--vcarb); }
