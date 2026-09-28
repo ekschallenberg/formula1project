@@ -5,7 +5,8 @@ A two-page data website about every timed lap of every Formula 1 World Champions
 - **Report** (`index.html`): nine findings, each with the numbers behind it and a chart, plus a section explaining the data.
 - **Dashboard** (`dashboard.html`): loads the data in the browser and lets you filter by season, team lineage,
   constructor, driver, nationality and Grand Prix, switch the measure and the breakdown, and see every number update.
-  A spinning globe marks every circuit in the current view and zooms in on the circuit when you pick a Grand Prix.
+  A spinning globe marks every circuit in the current view and zooms in on the circuit when you pick a Grand Prix,
+  with an outline of the track beside it.
 
 Live site: `https://ekschallenberg.github.io/formula1project/` (GitHub Pages, served from the `main` branch).
 
@@ -39,12 +40,15 @@ defines every measure (laps led, win, classified, finish rate, places gained, te
 | `js/metrics.js` | The dashboard's calculations: CSV parsing, filters, the 14 measures and group ranking. It has no browser code, so Node can run it too. |
 | `js/dashboard.js` | Wires the dashboard controls to `js/metrics.js` and redraws the numbers, globe, charts and table. |
 | `js/globe.js` | The dashboard globe (D3 orthographic projection): spins with a dot per circuit in view, can be dragged to turn it, zooms to the circuit when one Grand Prix is selected (clicking elsewhere on the globe zooms back out), and selects a Grand Prix when you click its dot. |
-| `js/venues.js` | Circuit names and coordinates, and which circuit hosted each Grand Prix in each season (several Grands Prix moved between circuits). |
+| `js/venues.js` | Circuit names and coordinates, which circuit hosted each Grand Prix in each season (several Grands Prix moved between circuits), and each circuit's track outline id. |
+| `js/tracks.js` | Loads `data/f1-circuits.geojson` and draws a circuit's track outline for the dashboard's Grand Prix panel. |
 | `data/formula1file.xlsx` | The raw lap-by-lap data (source file). |
 | `data/driver_races.csv` | One row per driver per race (11,041 rows), built from the laps. The dashboard loads this file. |
 | `data/report_data.json` | Every number and chart series on the report page. |
+| `data/f1-circuits.geojson` | Track outlines (current layouts) for 36 of the 41 circuits, from [bacinger/f1-circuits](https://github.com/bacinger/f1-circuits). Jerez, Fuji, Valencia, Yeongam and Buddh are not included. |
+| `data/f1-circuits-LICENSE.md` | The MIT licence and copyright notice for `f1-circuits.geojson`. |
 | `scripts/build_data.py` | Reads the spreadsheet, validates it and writes `driver_races.csv` and `report_data.json`. |
-| `scripts/check_numbers.mjs` | Runs the dashboard's own calculations in Node and checks they match all 289 figures in `report_data.json`, and that all 544 races map to a circuit. |
+| `scripts/check_numbers.mjs` | Runs the dashboard's own calculations in Node and checks they match all 289 figures in `report_data.json`, that all 544 races map to a circuit, and that every track outline id exists. |
 | `requirements.txt` | Python packages for the build script. |
 | `.nojekyll` | Tells GitHub Pages to serve the files as they are, without Jekyll processing. |
 
@@ -53,7 +57,7 @@ defines every measure (laps led, win, classified, finish rate, places gained, te
 ```bash
 pip install -r requirements.txt
 python3 scripts/build_data.py      # about a minute: reads 589k rows from Excel
-node scripts/check_numbers.mjs     # expects "833/833 checks agree"
+node scripts/check_numbers.mjs     # expects "869/869 checks agree"
 ```
 
 ## Viewing locally
