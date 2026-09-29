@@ -1,6 +1,6 @@
 // Where each Grand Prix was held. The lap data has race names but no circuit, and a few
 // names moved between circuits (European, French, German, Japanese, Portuguese, United States),
-// so each name lists its circuits with the seasons they were used, 1996–2024.
+// so each name lists its circuits with the seasons they were used, 1996–2026.
 // `track` is the circuit's id in data/f1-circuits.geojson (bacinger/f1-circuits), which has
 // outlines of current layouts; Jerez, Fuji, Valencia, Yeongam and Buddh are not in it.
 
@@ -23,6 +23,7 @@ export const CIRCUITS = {
   jeddah: { name: "Jeddah Corniche Circuit", city: "Jeddah", country: "Saudi Arabia", lat: 21.6319, lon: 39.1044, track: "sa-2021" },
   jerez: { name: "Circuito de Jerez", city: "Jerez", country: "Spain", lat: 36.7083, lon: -6.0342 },
   losail: { name: "Losail International Circuit", city: "Lusail", country: "Qatar", lat: 25.49, lon: 51.4542, track: "qa-2004" },
+  madring: { name: "Madring", city: "Madrid", country: "Spain", lat: 40.4655, lon: -3.6155, track: "es-2026" },
   magny_cours: { name: "Magny-Cours", city: "Magny-Cours", country: "France", lat: 46.8642, lon: 3.1633, track: "fr-1960" },
   marina_bay: { name: "Marina Bay Street Circuit", city: "Singapore", country: "Singapore", lat: 1.2914, lon: 103.864, track: "sg-2008" },
   mexico_city: { name: "Autódromo Hermanos Rodríguez", city: "Mexico City", country: "Mexico", lat: 19.4042, lon: -99.0907, track: "mx-1962" },
@@ -73,7 +74,7 @@ const HOSTS = {
   "Hungarian Grand Prix": [["hungaroring"]],
   "Indian Grand Prix": [["buddh"]],
   "Italian Grand Prix": [["monza"]],
-  "Japanese Grand Prix": [["suzuka", 1996, 2006], ["fuji", 2007, 2008], ["suzuka", 2009, 2024]],
+  "Japanese Grand Prix": [["suzuka", 1996, 2006], ["fuji", 2007, 2008], ["suzuka", 2009, 2026]],
   "Korean Grand Prix": [["yeongam"]],
   "Las Vegas Grand Prix": [["vegas"]],
   "Luxembourg Grand Prix": [["nurburgring"]],
@@ -89,12 +90,13 @@ const HOSTS = {
   "San Marino Grand Prix": [["imola"]],
   "Saudi Arabian Grand Prix": [["jeddah"]],
   "Singapore Grand Prix": [["marina_bay"]],
-  "Spanish Grand Prix": [["catalunya"]],
+  "Spanish Grand Prix": [["catalunya", 1996, 2025], ["madring", 2026, 2026]],
+  "Barcelona Grand Prix": [["catalunya"]],
   "Styrian Grand Prix": [["red_bull_ring"]],
   "São Paulo Grand Prix": [["interlagos"]],
   "Turkish Grand Prix": [["istanbul"]],
   "Tuscan Grand Prix": [["mugello"]],
-  "United States Grand Prix": [["indianapolis", 2000, 2007], ["americas", 2012, 2024]],
+  "United States Grand Prix": [["indianapolis", 2000, 2007], ["americas", 2012, 2026]],
 };
 
 // Circuit id for a race name in a season, or null if unknown.

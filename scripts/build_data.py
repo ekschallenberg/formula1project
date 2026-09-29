@@ -1,6 +1,8 @@
 """Build the site's data files from the raw lap-by-lap spreadsheet.
 
-Reads  data/formula1file.xlsx   (one row = one driver on one lap of one race)
+Reads  data/formula1file.xlsx   (one row = one driver on one lap of one race, 1996-2024)
+       data/laps_2025_2026.csv  (the same columns for 2025 onward, fetched from the Jolpica-F1 API
+                                 by scripts/fetch_new_seasons.py; optional)
 Writes data/driver_races.csv    (one row = one driver in one race; loaded by the dashboard)
        data/report_data.json    (every number and chart series used on the report page)
 
@@ -15,11 +17,15 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "formula1file.xlsx"
+NEW = ROOT / "data" / "laps_2025_2026.csv"
+# The season still in progress (its charts and figures are labelled partial). Set to None once
+# the fetch script has pulled the season's final race.
+PARTIAL_SEASON = 2026
 OUT_CSV = ROOT / "data" / "driver_races.csv"
 OUT_JSON = ROOT / "data" / "report_data.json"
 
-# Every constructor in the data mapped to the 2024 team it grew into ("team family").
-# Teams with no descendant on the 2024 grid go to "Defunct".
+# Every constructor in the data mapped to the team it grew into ("team family"), named as on the
+# 2025 grid (Sauber became Audi in 2026). Teams with no descendant on the grid go to "Defunct".
 TEAM_FAMILY = {
     "Ferrari": "Ferrari",
     "McLaren": "McLaren",
@@ -30,7 +36,8 @@ TEAM_FAMILY = {
     "Force India": "Aston Martin", "Racing Point": "Aston Martin", "Aston Martin": "Aston Martin",
     "Benetton": "Alpine", "Renault": "Alpine", "Lotus F1": "Alpine", "Alpine F1 Team": "Alpine",
     "Haas F1 Team": "Haas",
-    "Sauber": "Sauber", "BMW Sauber": "Sauber", "Alfa Romeo": "Sauber",
+    "Sauber": "Sauber", "BMW Sauber": "Sauber", "Alfa Romeo": "Sauber", "Audi": "Sauber",
+    "Cadillac F1 Team": "Cadillac",  # new team in 2026, no predecessor
     "Minardi": "VCARB", "Toro Rosso": "VCARB", "AlphaTauri": "VCARB", "RB F1 Team": "VCARB",
     "Ligier": "Defunct", "Prost": "Defunct", "Footwork": "Defunct", "Arrows": "Defunct", "Forti": "Defunct",
     "Toyota": "Defunct", "Super Aguri": "Defunct", "Lotus": "Defunct", "Caterham": "Defunct",
@@ -40,6 +47,15 @@ TEAM_FAMILY = {
 
 def load_laps() -> pd.DataFrame:
     laps = pd.read_excel(RAW, sheet_name="f1_lap_times_panel")
+    if NEW.exists():
+        new = pd.read_csv(NEW, parse_dates=["date"])
+        assert list(new.columns) == list(laps.columns), "new laps must use the spreadsheet's columns"
+        assert new.year.min() > laps.year.max(), "new laps must start after the spreadsheet ends"
+        laps = pd.concat([laps, new], ignore_index=True)
+    # The spreadsheet uses Ergast's numeric ids and the API uses text ids ("max_verstappen"),
+    # so drivers are identified by name; ids are kept as text.
+    laps["driverId"] = laps.driverId.astype(str)
+    laps["constructorId"] = laps.constructorId.astype(str)
     assert laps.notna().all().all(), "unexpected missing values"
     assert not laps.duplicated(["year", "round", "driverId", "lap"]).any(), "duplicate laps"
     missing = set(laps.constructor_name) - set(TEAM_FAMILY)
@@ -94,7 +110,7 @@ def build_driver_races(laps: pd.DataFrame) -> pd.DataFrame:
     dr = dr[cols].astype({"laps_led": int, "track_gains": int, "lap1_pos": int})
     for c in ["race", "driver", "nationality", "constructor"]:
         assert not dr[c].str.contains('[,"]').any(), f"{c} contains a comma or quote"
-    return dr.sort_values(["year", "round", "finish_pos"]).reset_index(drop=True)
+    return dr.sort_values(["year", "round", "finish_pos", "driver"]).reset_index(drop=True)
 
 
 def rows(df: pd.DataFrame) -> list:
@@ -112,10 +128,14 @@ def build_report(laps: pd.DataFrame, dr: pd.DataFrame) -> dict:
         "seasons": int(dr.year.nunique()),
         "first_year": int(dr.year.min()),
         "last_year": int(dr.year.max()),
-        "drivers": int(laps.driverId.nunique()),
+        "drivers": int(laps.driver_name.nunique()),
         "constructors": int(laps.constructor_name.nunique()),
         "race_laps": total_laps_led,
         "finish_rate": round(dr.classified.mean() * 100, 1),
+    }
+    last = dr.sort_values(["year", "round"]).iloc[-1]
+    r["partial"] = None if PARTIAL_SEASON is None or last.year != PARTIAL_SEASON else {
+        "year": int(last.year), "round": int(last["round"]), "race": last.race, "date": last.date,
     }
 
     # 1. Laps led by driver
@@ -127,7 +147,12 @@ def build_report(laps: pd.DataFrame, dr: pd.DataFrame) -> dict:
     # 2. Dominant constructor each season: share of that season's laps led
     t = dr.groupby(["year", "constructor", "team"]).laps_led.sum().reset_index()
     t["share"] = t.laps_led / t.groupby("year").laps_led.transform("sum") * 100
-    top = t.sort_values("share").groupby("year").tail(1).sort_values("year")
+    # ties go to the alphabetically first constructor, as on the dashboard; the other is noted
+    t = t.sort_values(["year", "laps_led", "constructor"], ascending=[True, False, True])
+    top = t.groupby("year").head(1).copy()
+    second = t.groupby("year").nth(1).set_index("year")
+    top["tied_with"] = [second.constructor.get(y) if second.laps_led.get(y) == n else None
+                        for y, n in zip(top.year, top.laps_led)]
     top["share"] = top.share.round(1)
     r["dominant_team"] = rows(top)
 
@@ -166,7 +191,23 @@ def build_report(laps: pd.DataFrame, dr: pd.DataFrame) -> dict:
     fam = dr.groupby("team").agg(wins=("win", "sum"), laps_led=("laps_led", "sum"),
                                  driver_races=("win", "size"), podiums=("podium", "sum")).reset_index()
     fam["win_rate"] = (fam.wins / fam.driver_races * 100).round(1)
-    r["team_family"] = rows(fam.sort_values("wins", ascending=False))
+    fam["label"] = fam.team
+    # If only one defunct team ever won, show that team under its own name and figures
+    # instead of the whole "Defunct" group.
+    defunct = dr[dr.team == "Defunct"]
+    winners = defunct.groupby("constructor").win.sum()
+    winners = winners[winners > 0]
+    if len(winners) == 1:
+        name = winners.index[0]
+        c = defunct[defunct.constructor == name]
+        i = fam.index[fam.team == "Defunct"][0]
+        fam.loc[i, ["wins", "laps_led", "driver_races", "podiums"]] = [
+            int(c.win.sum()), int(c.laps_led.sum()), len(c), int(c.podium.sum())]
+        fam.loc[i, "win_rate"] = round(c.win.sum() / len(c) * 100, 1)
+        fam.loc[i, "label"] = name
+        fam["constructor"] = fam.team.map({"Defunct": name})
+        r["defunct_without_wins"] = int(defunct.constructor.nunique() - 1)
+    r["team_family"] = rows(fam.sort_values(["wins", "label"], ascending=[False, True]))
     return r
 
 

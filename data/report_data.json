@@ -1,74 +1,80 @@
 {
  "headline": {
-  "lap_rows": 589081,
-  "driver_races": 11041,
-  "races": 544,
-  "seasons": 29,
+  "lap_rows": 632937,
+  "driver_races": 11826,
+  "races": 583,
+  "seasons": 31,
   "first_year": 1996,
-  "last_year": 2024,
-  "drivers": 143,
-  "constructors": 43,
-  "race_laps": 33196,
-  "finish_rate": 79.4
+  "last_year": 2026,
+  "drivers": 147,
+  "constructors": 45,
+  "race_laps": 35546,
+  "finish_rate": 80.0
+ },
+ "partial": {
+  "year": 2026,
+  "round": 15,
+  "race": "Azerbaijan Grand Prix",
+  "date": "2026-09-26"
  },
  "laps_led_drivers": [
   {
    "driver": "Lewis Hamilton",
-   "laps_led": 5487,
-   "wins": 103,
-   "share": 16.5
+   "laps_led": 5531,
+   "wins": 104,
+   "share": 15.6
   },
   {
    "driver": "Michael Schumacher",
    "laps_led": 3937,
    "wins": 72,
-   "share": 11.9
+   "share": 11.1
+  },
+  {
+   "driver": "Max Verstappen",
+   "laps_led": 3883,
+   "wins": 71,
+   "share": 10.9
   },
   {
    "driver": "Sebastian Vettel",
    "laps_led": 3501,
    "wins": 54,
-   "share": 10.5
-  },
-  {
-   "driver": "Max Verstappen",
-   "laps_led": 3418,
-   "wins": 63,
-   "share": 10.3
+   "share": 9.8
   },
   {
    "driver": "Fernando Alonso",
    "laps_led": 1773,
    "wins": 32,
-   "share": 5.3
+   "share": 5.0
   },
   {
    "driver": "Nico Rosberg",
    "laps_led": 1533,
    "wins": 23,
-   "share": 4.6
+   "share": 4.3
   },
   {
    "driver": "Mika H\u00e4kkinen",
    "laps_led": 1474,
    "wins": 20,
-   "share": 4.4
+   "share": 4.1
   },
   {
    "driver": "Kimi R\u00e4ikk\u00f6nen",
    "laps_led": 1305,
    "wins": 21,
-   "share": 3.9
+   "share": 3.7
+  },
+  {
+   "driver": "Charles Leclerc",
+   "laps_led": 1000,
+   "wins": 9,
+   "share": 2.8
   },
   {
    "driver": "Felipe Massa",
    "laps_led": 937,
-   "wins": 11,
-   "share": 2.8
-  },
-  {
-   "driver": "Rubens Barrichello",
-   "laps_led": 850,
    "wins": 11,
    "share": 2.6
   }
@@ -79,323 +85,368 @@
    "constructor": "Williams",
    "team": "Williams",
    "laps_led": 765,
-   "share": 75.4
+   "share": 75.4,
+   "tied_with": null
   },
   {
    "year": 1997,
    "constructor": "Williams",
    "team": "Williams",
    "laps_led": 424,
-   "share": 40.2
+   "share": 40.2,
+   "tied_with": null
   },
   {
    "year": 1998,
    "constructor": "McLaren",
    "team": "McLaren",
    "laps_led": 696,
-   "share": 68.6
+   "share": 68.6,
+   "tied_with": null
   },
   {
    "year": 1999,
    "constructor": "McLaren",
    "team": "McLaren",
    "laps_led": 528,
-   "share": 52.8
+   "share": 52.8,
+   "tied_with": null
   },
   {
    "year": 2000,
    "constructor": "Ferrari",
    "team": "Ferrari",
    "laps_led": 606,
-   "share": 56.4
+   "share": 56.4,
+   "tied_with": null
   },
   {
    "year": 2001,
    "constructor": "Ferrari",
    "team": "Ferrari",
    "laps_led": 614,
-   "share": 57.7
+   "share": 57.7,
+   "tied_with": null
   },
   {
    "year": 2002,
    "constructor": "Ferrari",
    "team": "Ferrari",
    "laps_led": 865,
-   "share": 79.4
+   "share": 79.4,
+   "tied_with": null
   },
   {
    "year": 2003,
    "constructor": "Ferrari",
    "team": "Ferrari",
    "laps_led": 383,
-   "share": 37.6
+   "share": 37.6,
+   "tied_with": null
   },
   {
    "year": 2004,
    "constructor": "Ferrari",
    "team": "Ferrari",
    "laps_led": 785,
-   "share": 70.0
+   "share": 70.0,
+   "tied_with": null
   },
   {
    "year": 2005,
    "constructor": "McLaren",
    "team": "McLaren",
    "laps_led": 592,
-   "share": 50.2
+   "share": 50.2,
+   "tied_with": null
   },
   {
    "year": 2006,
    "constructor": "Ferrari",
    "team": "Ferrari",
    "laps_led": 520,
-   "share": 45.7
+   "share": 45.7,
+   "tied_with": "Renault"
   },
   {
    "year": 2007,
    "constructor": "McLaren",
    "team": "McLaren",
    "laps_led": 524,
-   "share": 49.2
+   "share": 49.2,
+   "tied_with": null
   },
   {
    "year": 2008,
    "constructor": "Ferrari",
    "team": "Ferrari",
    "laps_led": 542,
-   "share": 48.5
+   "share": 48.5,
+   "tied_with": null
   },
   {
    "year": 2009,
    "constructor": "Brawn",
    "team": "Mercedes",
    "laps_led": 405,
-   "share": 41.0
+   "share": 41.0,
+   "tied_with": null
   },
   {
    "year": 2010,
    "constructor": "Red Bull",
    "team": "Red Bull",
    "laps_led": 699,
-   "share": 61.9
+   "share": 61.9,
+   "tied_with": null
   },
   {
    "year": 2011,
    "constructor": "Red Bull",
    "team": "Red Bull",
    "laps_led": 798,
-   "share": 70.4
+   "share": 70.4,
+   "tied_with": null
   },
   {
    "year": 2012,
    "constructor": "Red Bull",
    "team": "Red Bull",
    "laps_led": 434,
-   "share": 36.4
+   "share": 36.4,
+   "tied_with": null
   },
   {
    "year": 2013,
    "constructor": "Red Bull",
    "team": "Red Bull",
    "laps_led": 753,
-   "share": 66.6
+   "share": 66.6,
+   "tied_with": null
   },
   {
    "year": 2014,
    "constructor": "Mercedes",
    "team": "Mercedes",
    "laps_led": 980,
-   "share": 86.3
+   "share": 86.3,
+   "tied_with": null
   },
   {
    "year": 2015,
    "constructor": "Mercedes",
    "team": "Mercedes",
    "laps_led": 936,
-   "share": 81.5
+   "share": 81.5,
+   "tied_with": null
   },
   {
    "year": 2016,
    "constructor": "Mercedes",
    "team": "Mercedes",
    "laps_led": 1055,
-   "share": 83.2
+   "share": 83.2,
+   "tied_with": null
   },
   {
    "year": 2017,
    "constructor": "Mercedes",
    "team": "Mercedes",
    "laps_led": 714,
-   "share": 59.7
+   "share": 59.7,
+   "tied_with": null
   },
   {
    "year": 2018,
    "constructor": "Mercedes",
    "team": "Mercedes",
    "laps_led": 542,
-   "share": 42.9
+   "share": 42.9,
+   "tied_with": null
   },
   {
    "year": 2019,
    "constructor": "Mercedes",
    "team": "Mercedes",
    "laps_led": 696,
-   "share": 55.2
+   "share": 55.2,
+   "tied_with": null
   },
   {
    "year": 2020,
    "constructor": "Mercedes",
    "team": "Mercedes",
    "laps_led": 860,
-   "share": 82.9
+   "share": 82.9,
+   "tied_with": null
   },
   {
    "year": 2021,
    "constructor": "Red Bull",
    "team": "Red Bull",
    "laps_led": 698,
-   "share": 53.8
+   "share": 53.8,
+   "tied_with": null
   },
   {
    "year": 2022,
    "constructor": "Red Bull",
    "team": "Red Bull",
    "laps_led": 763,
-   "share": 59.0
+   "share": 59.0,
+   "tied_with": null
   },
   {
    "year": 2023,
    "constructor": "Red Bull",
    "team": "Red Bull",
    "laps_led": 1149,
-   "share": 86.7
+   "share": 86.7,
+   "tied_with": null
   },
   {
    "year": 2024,
    "constructor": "Red Bull",
    "team": "Red Bull",
    "laps_led": 561,
-   "share": 38.9
+   "share": 38.9,
+   "tied_with": null
+  },
+  {
+   "year": 2025,
+   "constructor": "McLaren",
+   "team": "McLaren",
+   "laps_led": 825,
+   "share": 57.1,
+   "tied_with": null
+  },
+  {
+   "year": 2026,
+   "constructor": "Mercedes",
+   "team": "Mercedes",
+   "laps_led": 591,
+   "share": 65.2,
+   "tied_with": null
   }
  ],
  "win_by_lap1": [
   {
    "lap1_pos": 1,
-   "driver_races": 544,
-   "wins": 301,
-   "win_rate": 55.3
+   "driver_races": 583,
+   "wins": 325,
+   "win_rate": 55.7
   },
   {
    "lap1_pos": 2,
-   "driver_races": 544,
-   "wins": 125,
+   "driver_races": 583,
+   "wins": 134,
    "win_rate": 23.0
   },
   {
    "lap1_pos": 3,
-   "driver_races": 544,
-   "wins": 54,
-   "win_rate": 9.9
+   "driver_races": 583,
+   "wins": 57,
+   "win_rate": 9.8
   },
   {
    "lap1_pos": 4,
-   "driver_races": 544,
+   "driver_races": 583,
    "wins": 18,
-   "win_rate": 3.3
+   "win_rate": 3.1
   },
   {
    "lap1_pos": 5,
-   "driver_races": 544,
-   "wins": 15,
-   "win_rate": 2.8
+   "driver_races": 583,
+   "wins": 16,
+   "win_rate": 2.7
   },
   {
    "lap1_pos": 6,
-   "driver_races": 544,
-   "wins": 11,
-   "win_rate": 2.0
+   "driver_races": 583,
+   "wins": 12,
+   "win_rate": 2.1
   },
   {
    "lap1_pos": 7,
-   "driver_races": 543,
+   "driver_races": 582,
    "wins": 3,
-   "win_rate": 0.6
+   "win_rate": 0.5
   },
   {
    "lap1_pos": 8,
-   "driver_races": 543,
+   "driver_races": 582,
    "wins": 4,
    "win_rate": 0.7
   },
   {
    "lap1_pos": 9,
-   "driver_races": 543,
+   "driver_races": 582,
    "wins": 2,
-   "win_rate": 0.4
+   "win_rate": 0.3
   },
   {
    "lap1_pos": 10,
-   "driver_races": 543,
+   "driver_races": 582,
    "wins": 3,
-   "win_rate": 0.6
+   "win_rate": 0.5
   },
   {
    "lap1_pos": 11,
-   "driver_races": 543,
+   "driver_races": 582,
    "wins": 2,
-   "win_rate": 0.4
+   "win_rate": 0.3
   },
   {
    "lap1_pos": 12,
-   "driver_races": 543,
+   "driver_races": 582,
    "wins": 3,
-   "win_rate": 0.6
+   "win_rate": 0.5
   },
   {
    "lap1_pos": 13,
-   "driver_races": 543,
+   "driver_races": 582,
    "wins": 2,
-   "win_rate": 0.4
+   "win_rate": 0.3
   },
   {
    "lap1_pos": 14,
-   "driver_races": 542,
-   "wins": 0,
-   "win_rate": 0.0
+   "driver_races": 581,
+   "wins": 1,
+   "win_rate": 0.2
   },
   {
    "lap1_pos": 15,
-   "driver_races": 541,
+   "driver_races": 580,
    "wins": 0,
    "win_rate": 0.0
   },
   {
    "lap1_pos": 16,
-   "driver_races": 539,
+   "driver_races": 578,
    "wins": 0,
    "win_rate": 0.0
   },
   {
    "lap1_pos": 17,
-   "driver_races": 529,
+   "driver_races": 568,
    "wins": 0,
    "win_rate": 0.0
   },
   {
    "lap1_pos": 18,
-   "driver_races": 514,
+   "driver_races": 551,
    "wins": 1,
    "win_rate": 0.2
   },
   {
    "lap1_pos": 19,
-   "driver_races": 479,
+   "driver_races": 514,
    "wins": 0,
    "win_rate": 0.0
   },
   {
    "lap1_pos": 20,
-   "driver_races": 413,
+   "driver_races": 441,
    "wins": 0,
    "win_rate": 0.0
   }
@@ -574,6 +625,18 @@
    "driver_races": 465,
    "classified": 432,
    "finish_rate": 92.9
+  },
+  {
+   "year": 2025,
+   "driver_races": 465,
+   "classified": 430,
+   "finish_rate": 92.5
+  },
+  {
+   "year": 2026,
+   "driver_races": 320,
+   "classified": 264,
+   "finish_rate": 82.5
   }
  ],
  "track_gains": [
@@ -750,6 +813,18 @@
    "track_gains": 3768,
    "races": 24,
    "gains_per_race": 157.0
+  },
+  {
+   "year": 2025,
+   "track_gains": 3884,
+   "races": 24,
+   "gains_per_race": 161.8
+  },
+  {
+   "year": 2026,
+   "track_gains": 2058,
+   "races": 15,
+   "gains_per_race": 137.2
   }
  ],
  "monaco": [
@@ -892,6 +967,16 @@
    "year": 2024,
    "best_ms": 74165,
    "best_s": 74.165
+  },
+  {
+   "year": 2025,
+   "best_ms": 73221,
+   "best_s": 73.221
+  },
+  {
+   "year": 2026,
+   "best_ms": 73481,
+   "best_s": 73.481
   }
  ],
  "calendar": [
@@ -1039,9 +1124,25 @@
    "year": 2024,
    "races": 24,
    "laps": 26574
+  },
+  {
+   "year": 2025,
+   "races": 24,
+   "laps": 26657
+  },
+  {
+   "year": 2026,
+   "races": 15,
+   "laps": 17199
   }
  ],
  "nationality": [
+  {
+   "nationality": "British",
+   "wins": 167,
+   "laps_led": 9175,
+   "drivers": 19
+  },
   {
    "nationality": "German",
    "wins": 158,
@@ -1049,15 +1150,9 @@
    "drivers": 13
   },
   {
-   "nationality": "British",
-   "wins": 152,
-   "laps_led": 8320,
-   "drivers": 18
-  },
-  {
    "nationality": "Dutch",
-   "wins": 63,
-   "laps_led": 3418,
+   "wins": 71,
+   "laps_led": 3883,
    "drivers": 6
   },
   {
@@ -1073,16 +1168,22 @@
    "drivers": 6
   },
   {
+   "nationality": "Australian",
+   "wins": 26,
+   "laps_led": 1568,
+   "drivers": 4
+  },
+  {
    "nationality": "Brazilian",
    "wins": 22,
    "laps_led": 1818,
-   "drivers": 15
+   "drivers": 16
   },
   {
-   "nationality": "Australian",
-   "wins": 19,
-   "laps_led": 1075,
-   "drivers": 4
+   "nationality": "Italian",
+   "wins": 12,
+   "laps_led": 746,
+   "drivers": 13
   },
   {
    "nationality": "Canadian",
@@ -1092,105 +1193,132 @@
   },
   {
    "nationality": "Monegasque",
-   "wins": 8,
-   "laps_led": 830,
-   "drivers": 1
-  },
-  {
-   "nationality": "Colombian",
-   "wins": 7,
-   "laps_led": 605,
+   "wins": 9,
+   "laps_led": 1000,
    "drivers": 1
   }
  ],
+ "defunct_without_wins": 12,
  "team_family": [
   {
    "team": "Ferrari",
-   "wins": 144,
-   "laps_led": 8925,
-   "driver_races": 1053,
-   "podiums": 451,
-   "win_rate": 13.7
+   "wins": 146,
+   "laps_led": 9139,
+   "driver_races": 1131,
+   "podiums": 467,
+   "win_rate": 12.9,
+   "label": "Ferrari",
+   "constructor": null
   },
   {
    "team": "Mercedes",
-   "wins": 128,
-   "laps_led": 7264,
-   "driver_races": 1051,
-   "podiums": 318,
-   "win_rate": 12.2
+   "wins": 141,
+   "laps_led": 7969,
+   "driver_races": 1127,
+   "podiums": 350,
+   "win_rate": 12.5,
+   "label": "Mercedes",
+   "constructor": null
   },
   {
    "team": "Red Bull",
-   "wins": 123,
-   "laps_led": 7133,
-   "driver_races": 1016,
-   "podiums": 299,
-   "win_rate": 12.1
+   "wins": 131,
+   "laps_led": 7598,
+   "driver_races": 1091,
+   "podiums": 323,
+   "win_rate": 12.0,
+   "label": "Red Bull",
+   "constructor": null
   },
   {
    "team": "McLaren",
-   "wins": 85,
-   "laps_led": 5419,
-   "driver_races": 1054,
-   "podiums": 272,
-   "win_rate": 8.1
+   "wins": 101,
+   "laps_led": 6383,
+   "driver_races": 1128,
+   "podiums": 315,
+   "win_rate": 9.0,
+   "label": "McLaren",
+   "constructor": null
   },
   {
    "team": "Williams",
    "wins": 31,
-   "laps_led": 2081,
-   "driver_races": 1051,
-   "podiums": 110,
-   "win_rate": 2.9
+   "laps_led": 2082,
+   "driver_races": 1126,
+   "podiums": 112,
+   "win_rate": 2.8,
+   "label": "Williams",
+   "constructor": null
   },
   {
    "team": "Alpine",
    "wins": 24,
-   "laps_led": 1732,
-   "driver_races": 1050,
-   "podiums": 117,
-   "win_rate": 2.3
+   "laps_led": 1733,
+   "driver_races": 1124,
+   "podiums": 118,
+   "win_rate": 2.1,
+   "label": "Alpine",
+   "constructor": null
   },
   {
    "team": "Aston Martin",
    "wins": 5,
    "laps_led": 247,
-   "driver_races": 1035,
+   "driver_races": 1111,
    "podiums": 39,
-   "win_rate": 0.5
+   "win_rate": 0.5,
+   "label": "Aston Martin",
+   "constructor": null
   },
   {
    "team": "VCARB",
    "wins": 2,
    "laps_led": 87,
-   "driver_races": 1032,
-   "podiums": 5,
-   "win_rate": 0.2
+   "driver_races": 1107,
+   "podiums": 6,
+   "win_rate": 0.2,
+   "label": "VCARB",
+   "constructor": null
   },
   {
    "team": "Defunct",
    "wins": 1,
-   "laps_led": 181,
-   "driver_races": 1289,
-   "podiums": 19,
-   "win_rate": 0.1
+   "laps_led": 16,
+   "driver_races": 31,
+   "podiums": 1,
+   "win_rate": 3.2,
+   "label": "Ligier",
+   "constructor": "Ligier"
   },
   {
    "team": "Sauber",
    "wins": 1,
    "laps_led": 127,
-   "driver_races": 1045,
-   "podiums": 27,
-   "win_rate": 0.1
+   "driver_races": 1119,
+   "podiums": 28,
+   "win_rate": 0.1,
+   "label": "Sauber",
+   "constructor": null
+  },
+  {
+   "team": "Cadillac",
+   "wins": 0,
+   "laps_led": 0,
+   "driver_races": 30,
+   "podiums": 0,
+   "win_rate": 0.0,
+   "label": "Cadillac",
+   "constructor": null
   },
   {
    "team": "Haas",
    "wins": 0,
    "laps_led": 0,
-   "driver_races": 365,
+   "driver_races": 443,
    "podiums": 0,
-   "win_rate": 0.0
+   "win_rate": 0.0,
+   "label": "Haas",
+   "constructor": null
   }
  ]
 }
