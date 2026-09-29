@@ -1,0 +1,47 @@
+# Fetches lap-by-lap data for 2025 and 2026 from the Jolpica-F1 API and commits it to
+# data/laps_2025_2026.csv on the branch it runs on. Runs automatically when the fetch script or
+# this workflow changes on the working branch; it can also be started by hand from the Actions tab
+# ("Run workflow") to pick up new 2026 races as the season goes on. Races already saved are skipped.
+name: Fetch 2025-2026 lap data
+
+on:
+  push:
+    branches: [claude/lucid-maxwell-0mrvqr]
+    paths:
+      - scripts/fetch_new_seasons.py
+      - .github/workflows/fetch-laps.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-laps-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch laps (about an hour, to respect the API's rate limit)
+        run: python3 scripts/fetch_new_seasons.py 2025 2026
+
+      - name: Commit the data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/laps_2025_2026.csv
+          if git diff --cached --quiet; then
+            echo "No new races to add."
+          else
+            git commit -m "Add 2025-2026 lap data from the Jolpica-F1 API"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
