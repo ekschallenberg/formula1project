@@ -1,6 +1,8 @@
 """Build the site's data files from the raw lap-by-lap spreadsheet.
 
-Reads  data/formula1file.xlsx   (one row = one driver on one lap of one race)
+Reads  data/formula1file.xlsx   (one row = one driver on one lap of one race, 1996-2024)
+       data/laps_2025_2026.csv  (the same columns for 2025 onward, fetched from the Jolpica-F1 API
+                                 by scripts/fetch_new_seasons.py; optional)
 Writes data/driver_races.csv    (one row = one driver in one race; loaded by the dashboard)
        data/report_data.json    (every number and chart series used on the report page)
 
@@ -15,6 +17,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "formula1file.xlsx"
+NEW = ROOT / "data" / "laps_2025_2026.csv"
 OUT_CSV = ROOT / "data" / "driver_races.csv"
 OUT_JSON = ROOT / "data" / "report_data.json"
 
@@ -40,6 +43,15 @@ TEAM_FAMILY = {
 
 def load_laps() -> pd.DataFrame:
     laps = pd.read_excel(RAW, sheet_name="f1_lap_times_panel")
+    if NEW.exists():
+        new = pd.read_csv(NEW, parse_dates=["date"])
+        assert list(new.columns) == list(laps.columns), "new laps must use the spreadsheet's columns"
+        assert new.year.min() > laps.year.max(), "new laps must start after the spreadsheet ends"
+        laps = pd.concat([laps, new], ignore_index=True)
+    # The spreadsheet uses Ergast's numeric ids and the API uses text ids ("max_verstappen"),
+    # so drivers are identified by name; ids are kept as text.
+    laps["driverId"] = laps.driverId.astype(str)
+    laps["constructorId"] = laps.constructorId.astype(str)
     assert laps.notna().all().all(), "unexpected missing values"
     assert not laps.duplicated(["year", "round", "driverId", "lap"]).any(), "duplicate laps"
     missing = set(laps.constructor_name) - set(TEAM_FAMILY)
@@ -112,7 +124,7 @@ def build_report(laps: pd.DataFrame, dr: pd.DataFrame) -> dict:
         "seasons": int(dr.year.nunique()),
         "first_year": int(dr.year.min()),
         "last_year": int(dr.year.max()),
-        "drivers": int(laps.driverId.nunique()),
+        "drivers": int(laps.driver_name.nunique()),
         "constructors": int(laps.constructor_name.nunique()),
         "race_laps": total_laps_led,
         "finish_rate": round(dr.classified.mean() * 100, 1),
