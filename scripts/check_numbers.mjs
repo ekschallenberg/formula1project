@@ -56,8 +56,10 @@ for (const d of report.calendar) {
 }
 for (const d of report.nationality) eq(`wins ${d.nationality}`, M.wins.calc(view({ nationality: d.nationality })), d.wins);
 for (const d of report.team_family) {
-  eq(`wins ${d.team}`, M.wins.calc(view({ team: d.team })), d.wins);
-  eq(`win rate ${d.team}`, M.win_rate.calc(view({ team: d.team })), d.win_rate);
+  // a lone defunct winner is shown as that constructor rather than the whole group
+  const v = d.constructor ? view({ cons: d.constructor }) : view({ team: d.team });
+  eq(`wins ${d.label}`, M.wins.calc(v), d.wins);
+  eq(`win rate ${d.label}`, M.win_rate.calc(v), d.win_rate);
 }
 
 // Every race in the data must map to a circuit on the dashboard globe.

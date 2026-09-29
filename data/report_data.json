@@ -1103,6 +1103,7 @@
    "drivers": 1
   }
  ],
+ "defunct_without_wins": 12,
  "team_family": [
   {
    "team": "Ferrari",
@@ -1110,7 +1111,9 @@
    "laps_led": 8925,
    "driver_races": 1053,
    "podiums": 451,
-   "win_rate": 13.7
+   "win_rate": 13.7,
+   "label": "Ferrari",
+   "constructor": null
   },
   {
    "team": "Mercedes",
@@ -1118,7 +1121,9 @@
    "laps_led": 7264,
    "driver_races": 1051,
    "podiums": 318,
-   "win_rate": 12.2
+   "win_rate": 12.2,
+   "label": "Mercedes",
+   "constructor": null
   },
   {
    "team": "Red Bull",
@@ -1126,7 +1131,9 @@
    "laps_led": 7133,
    "driver_races": 1016,
    "podiums": 299,
-   "win_rate": 12.1
+   "win_rate": 12.1,
+   "label": "Red Bull",
+   "constructor": null
   },
   {
    "team": "McLaren",
@@ -1134,7 +1141,9 @@
    "laps_led": 5419,
    "driver_races": 1054,
    "podiums": 272,
-   "win_rate": 8.1
+   "win_rate": 8.1,
+   "label": "McLaren",
+   "constructor": null
   },
   {
    "team": "Williams",
@@ -1142,7 +1151,9 @@
    "laps_led": 2081,
    "driver_races": 1051,
    "podiums": 110,
-   "win_rate": 2.9
+   "win_rate": 2.9,
+   "label": "Williams",
+   "constructor": null
   },
   {
    "team": "Alpine",
@@ -1150,7 +1161,9 @@
    "laps_led": 1732,
    "driver_races": 1050,
    "podiums": 117,
-   "win_rate": 2.3
+   "win_rate": 2.3,
+   "label": "Alpine",
+   "constructor": null
   },
   {
    "team": "Aston Martin",
@@ -1158,7 +1171,9 @@
    "laps_led": 247,
    "driver_races": 1035,
    "podiums": 39,
-   "win_rate": 0.5
+   "win_rate": 0.5,
+   "label": "Aston Martin",
+   "constructor": null
   },
   {
    "team": "VCARB",
@@ -1166,15 +1181,19 @@
    "laps_led": 87,
    "driver_races": 1032,
    "podiums": 5,
-   "win_rate": 0.2
+   "win_rate": 0.2,
+   "label": "VCARB",
+   "constructor": null
   },
   {
    "team": "Defunct",
    "wins": 1,
-   "laps_led": 181,
-   "driver_races": 1289,
-   "podiums": 19,
-   "win_rate": 0.1
+   "laps_led": 16,
+   "driver_races": 31,
+   "podiums": 1,
+   "win_rate": 3.2,
+   "label": "Ligier",
+   "constructor": "Ligier"
   },
   {
    "team": "Sauber",
@@ -1182,7 +1201,9 @@
    "laps_led": 127,
    "driver_races": 1045,
    "podiums": 27,
-   "win_rate": 0.1
+   "win_rate": 0.1,
+   "label": "Sauber",
+   "constructor": null
   },
   {
    "team": "Haas",
@@ -1190,7 +1211,9 @@
    "laps_led": 0,
    "driver_races": 365,
    "podiums": 0,
-   "win_rate": 0.0
+   "win_rate": 0.0,
+   "label": "Haas",
+   "constructor": null
   }
  ]
 }

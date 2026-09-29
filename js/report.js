@@ -185,12 +185,14 @@ async function main() {
 
   // 9. Wins by team lineage
   const d9 = r.team_family;
-  const c9 = bar("c9", d9.map((d) => d.team), d9.map((d) => d.wins), {
+  const c9 = bar("c9", d9.map((d) => d.label), d9.map((d) => d.wins), {
     horizontal: true, colors: d9.map((d) => TEAM_COLORS[d.team]),
   });
   c9.options.plugins.tooltip.callbacks.label = (c) => {
     const d = d9[c.dataIndex];
-    return ` ${d.wins} wins from ${fmtInt(d.driver_races)} starts (${fmt1(d.win_rate)}%), ${fmtInt(d.laps_led)} laps led`;
+    const lines = [` ${d.wins} win${d.wins === 1 ? "" : "s"} from ${fmtInt(d.driver_races)} starts (${fmt1(d.win_rate)}%), ${fmtInt(d.laps_led)} laps led`];
+    if (d.constructor) lines.push(" No longer racing (grey = defunct team)");
+    return lines;
   };
 }
 

@@ -106,7 +106,7 @@ def build_driver_races(laps: pd.DataFrame) -> pd.DataFrame:
     dr = dr[cols].astype({"laps_led": int, "track_gains": int, "lap1_pos": int})
     for c in ["race", "driver", "nationality", "constructor"]:
         assert not dr[c].str.contains('[,"]').any(), f"{c} contains a comma or quote"
-    return dr.sort_values(["year", "round", "finish_pos"]).reset_index(drop=True)
+    return dr.sort_values(["year", "round", "finish_pos", "driver"]).reset_index(drop=True)
 
 
 def rows(df: pd.DataFrame) -> list:
@@ -178,7 +178,23 @@ def build_report(laps: pd.DataFrame, dr: pd.DataFrame) -> dict:
     fam = dr.groupby("team").agg(wins=("win", "sum"), laps_led=("laps_led", "sum"),
                                  driver_races=("win", "size"), podiums=("podium", "sum")).reset_index()
     fam["win_rate"] = (fam.wins / fam.driver_races * 100).round(1)
-    r["team_family"] = rows(fam.sort_values("wins", ascending=False))
+    fam["label"] = fam.team
+    # If only one defunct team ever won, show that team under its own name and figures
+    # instead of the whole "Defunct" group.
+    defunct = dr[dr.team == "Defunct"]
+    winners = defunct.groupby("constructor").win.sum()
+    winners = winners[winners > 0]
+    if len(winners) == 1:
+        name = winners.index[0]
+        c = defunct[defunct.constructor == name]
+        i = fam.index[fam.team == "Defunct"][0]
+        fam.loc[i, ["wins", "laps_led", "driver_races", "podiums"]] = [
+            int(c.win.sum()), int(c.laps_led.sum()), len(c), int(c.podium.sum())]
+        fam.loc[i, "win_rate"] = round(c.win.sum() / len(c) * 100, 1)
+        fam.loc[i, "label"] = name
+        fam["constructor"] = fam.team.map({"Defunct": name})
+        r["defunct_without_wins"] = int(defunct.constructor.nunique() - 1)
+    r["team_family"] = rows(fam.sort_values(["wins", "label"], ascending=[False, True]))
     return r
 
 
