@@ -13,6 +13,7 @@ export const TEAM_COLORS = {
   "Haas": "#C21A1A",
   "Sauber": "#53E254",
   "VCARB": "#58B6FF",
+  "Cadillac": "#C54CFF", // new in 2026; takes the poster's unused F1 Academy purple
   "Defunct": "#979797",
 };
 

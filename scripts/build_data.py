@@ -18,11 +18,14 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "formula1file.xlsx"
 NEW = ROOT / "data" / "laps_2025_2026.csv"
+# The season still in progress (its charts and figures are labelled partial). Set to None once
+# the fetch script has pulled the season's final race.
+PARTIAL_SEASON = 2026
 OUT_CSV = ROOT / "data" / "driver_races.csv"
 OUT_JSON = ROOT / "data" / "report_data.json"
 
-# Every constructor in the data mapped to the 2024 team it grew into ("team family").
-# Teams with no descendant on the 2024 grid go to "Defunct".
+# Every constructor in the data mapped to the team it grew into ("team family"), named as on the
+# 2025 grid (Sauber became Audi in 2026). Teams with no descendant on the grid go to "Defunct".
 TEAM_FAMILY = {
     "Ferrari": "Ferrari",
     "McLaren": "McLaren",
@@ -33,7 +36,8 @@ TEAM_FAMILY = {
     "Force India": "Aston Martin", "Racing Point": "Aston Martin", "Aston Martin": "Aston Martin",
     "Benetton": "Alpine", "Renault": "Alpine", "Lotus F1": "Alpine", "Alpine F1 Team": "Alpine",
     "Haas F1 Team": "Haas",
-    "Sauber": "Sauber", "BMW Sauber": "Sauber", "Alfa Romeo": "Sauber",
+    "Sauber": "Sauber", "BMW Sauber": "Sauber", "Alfa Romeo": "Sauber", "Audi": "Sauber",
+    "Cadillac F1 Team": "Cadillac",  # new team in 2026, no predecessor
     "Minardi": "VCARB", "Toro Rosso": "VCARB", "AlphaTauri": "VCARB", "RB F1 Team": "VCARB",
     "Ligier": "Defunct", "Prost": "Defunct", "Footwork": "Defunct", "Arrows": "Defunct", "Forti": "Defunct",
     "Toyota": "Defunct", "Super Aguri": "Defunct", "Lotus": "Defunct", "Caterham": "Defunct",
@@ -129,6 +133,10 @@ def build_report(laps: pd.DataFrame, dr: pd.DataFrame) -> dict:
         "race_laps": total_laps_led,
         "finish_rate": round(dr.classified.mean() * 100, 1),
     }
+    last = dr.sort_values(["year", "round"]).iloc[-1]
+    r["partial"] = None if PARTIAL_SEASON is None or last.year != PARTIAL_SEASON else {
+        "year": int(last.year), "round": int(last["round"]), "race": last.race, "date": last.date,
+    }
 
     # 1. Laps led by driver
     d = dr.groupby("driver").agg(laps_led=("laps_led", "sum"), wins=("win", "sum")).reset_index()
@@ -139,7 +147,12 @@ def build_report(laps: pd.DataFrame, dr: pd.DataFrame) -> dict:
     # 2. Dominant constructor each season: share of that season's laps led
     t = dr.groupby(["year", "constructor", "team"]).laps_led.sum().reset_index()
     t["share"] = t.laps_led / t.groupby("year").laps_led.transform("sum") * 100
-    top = t.sort_values("share").groupby("year").tail(1).sort_values("year")
+    # ties go to the alphabetically first constructor, as on the dashboard; the other is noted
+    t = t.sort_values(["year", "laps_led", "constructor"], ascending=[True, False, True])
+    top = t.groupby("year").head(1).copy()
+    second = t.groupby("year").nth(1).set_index("year")
+    top["tied_with"] = [second.constructor.get(y) if second.laps_led.get(y) == n else None
+                        for y, n in zip(top.year, top.laps_led)]
     top["share"] = top.share.round(1)
     r["dominant_team"] = rows(top)
 

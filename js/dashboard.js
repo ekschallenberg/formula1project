@@ -22,6 +22,7 @@ const state = {};
 const charts = {};
 let tableSort = null; // { key, dir }
 let globe = null;
+let PARTIAL = null; // { year, round, race, date } for a season still in progress
 let trackToken = 0; // ignores outline loads for a Grand Prix that is no longer selected
 
 // ---------- formatting ----------
@@ -72,15 +73,18 @@ function seriesColors(breakdown, names) {
 }
 
 // ---------- controls ----------
-function fillSelect(el, values, allLabel) {
+function fillSelect(el, values, allLabel, label = (v) => v) {
   el.innerHTML = (allLabel ? `<option value="">${allLabel}</option>` : "") +
-    values.map((v) => `<option value="${v}">${v}</option>`).join("");
+    values.map((v) => `<option value="${v}">${label(v)}</option>`).join("");
 }
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const fmtDay = (iso) => { const [y, m, d] = iso.split("-").map(Number); return `${d} ${MONTHS[m - 1]} ${y}`; };
+const yearLabel = (y) => (PARTIAL && y === PARTIAL.year ? `${y} (in progress)` : y);
 
 function buildControls() {
   const uniq = (f) => [...new Set(ROWS.map((r) => r[f]))].sort((a, b) => String(a).localeCompare(String(b)));
-  fillSelect($("f-from"), YEARS);
-  fillSelect($("f-to"), YEARS);
+  fillSelect($("f-from"), YEARS, null, yearLabel);
+  fillSelect($("f-to"), YEARS, null, yearLabel);
   fillSelect($("f-team"), uniq("team"), "All team lineages");
   fillSelect($("f-cons"), uniq("constructor"), "All constructors");
   fillSelect($("f-driver"), uniq("driver"), "All drivers");
@@ -442,7 +446,8 @@ function update() {
   const { rows, ctx, yearCtx } = currentView();
   const races = MEASURES.races.calc(rows);
   $("status").textContent = rows.length
-    ? `Showing ${fmtInt(rows.length)} driver-race entries from ${fmtInt(races)} Grand${races === 1 ? "" : "s"} Prix, ${state.from}–${state.to}.`
+    ? `Showing ${fmtInt(rows.length)} driver-race entries from ${fmtInt(races)} Grand${races === 1 ? "" : "s"} Prix, ${state.from}–${state.to}.` +
+      (PARTIAL && state.to >= PARTIAL.year ? ` ${PARTIAL.year} is in progress (through round ${PARTIAL.round}).` : "")
     : "No driver-race entries match these filters. Loosen a filter or press Reset.";
   renderKPIs(rows, ctx);
   $("dash-body").style.display = rows.length ? "" : "none";
@@ -461,6 +466,15 @@ async function main() {
   const res = await fetch("data/driver_races.csv");
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   ROWS = parseCSV(await res.text());
+  try {
+    PARTIAL = (await (await fetch("data/report_data.json")).json()).partial || null;
+  } catch {
+    PARTIAL = null; // the dashboard works without it; the season just isn't labelled
+  }
+  if (PARTIAL) {
+    $("partial-intro").textContent =
+      ` (${PARTIAL.year} is in progress: ${PARTIAL.round} races, through the ${PARTIAL.race} on ${fmtDay(PARTIAL.date)})`;
+  }
   YEARS = [...new Set(ROWS.map((r) => r.year))].sort((a, b) => a - b);
   for (const r of ROWS) TEAM_OF.set(r.constructor, r.team);
   for (const bd of Object.keys(BREAKDOWNS)) {

@@ -7,7 +7,8 @@ import { parseCSV, MEASURES as M, applyFilters, groupBy, rankGroups, raceLaps } 
 
 const rows = parseCSV(readFileSync("data/driver_races.csv", "utf8"));
 const report = JSON.parse(readFileSync("data/report_data.json", "utf8"));
-const ALL = { from: 1996, to: 2024, team: "", cons: "", driver: "", nationality: "", race: "" };
+const YEARS = rows.map((r) => r.year);
+const ALL = { from: Math.min(...YEARS), to: Math.max(...YEARS), team: "", cons: "", driver: "", nationality: "", race: "" };
 const view = (f) => applyFilters(rows, { ...ALL, ...f });
 
 let checks = 0;

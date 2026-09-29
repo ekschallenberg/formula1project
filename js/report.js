@@ -6,11 +6,14 @@ applyChartDefaults(Chart);
 
 const HEADLINE_COLORS = ["var(--ferrari)", "var(--williams)", "var(--mclaren)", "var(--mercedes)", "var(--alpine)", "var(--sauber)"];
 
-function renderHeadline(h) {
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const fmtDate = (iso) => { const [y, m, d] = iso.split("-").map(Number); return `${d} ${MONTHS[m - 1]} ${y}`; };
+
+function renderHeadline(h, partial) {
   const tiles = [
     [fmtInt(h.lap_rows), "timed laps in the data"],
     [fmtInt(h.races), `Grands Prix, ${h.first_year}–${h.last_year}`],
-    [fmtInt(h.seasons), "championship seasons"],
+    [fmtInt(h.seasons), partial ? `championship seasons (${partial.year} in progress)` : "championship seasons"],
     [fmtInt(h.drivers), `drivers for ${h.constructors} constructors`],
     [fmtInt(h.race_laps), "race laps led (one leader per lap)"],
     [fmtPct(h.finish_rate), "of starts ended classified"],
@@ -66,7 +69,16 @@ function legend(el, entries) {
 async function main() {
   const res = await fetch("data/report_data.json");
   const r = await res.json();
-  renderHeadline(r.headline);
+  renderHeadline(r.headline, r.partial);
+
+  // The season still in progress is starred and drawn lighter in per-season charts.
+  const P = r.partial;
+  const yl = (y) => (P && y === P.year ? `${y}*` : String(y));
+  const fade = (y, color) => (P && y === P.year ? color + "80" : color);
+  if (P) {
+    const note = `* ${P.year} in progress: ${P.round} races, through the ${P.race} on ${fmtDate(P.date)}.`;
+    document.querySelectorAll(".partial-note").forEach((el) => { el.textContent = note; });
+  }
 
   // 1. Laps led by driver: Hamilton highlighted, the rest muted
   const d1 = r.laps_led_drivers;
@@ -79,14 +91,14 @@ async function main() {
 
   // 2. Dominant team per season, coloured by lineage
   const d2 = r.dominant_team;
-  const c2 = bar("c2", d2.map((d) => d.year), d2.map((d) => d.share), {
-    colors: d2.map((d) => TEAM_COLORS[d.team]),
+  const c2 = bar("c2", d2.map((d) => yl(d.year)), d2.map((d) => d.share), {
+    colors: d2.map((d) => fade(d.year, TEAM_COLORS[d.team])),
     fmt: (v) => v + "%",
     max: 100,
   });
   c2.options.plugins.tooltip.callbacks.label = (c) => {
     const d = d2[c.dataIndex];
-    return ` ${d.constructor}: ${fmt1(d.share)}% (${fmtInt(d.laps_led)} laps led)`;
+    return ` ${d.constructor}: ${fmt1(d.share)}% (${fmtInt(d.laps_led)} laps led${d.tied_with ? `, tied with ${d.tied_with}` : ""})`;
   };
   const seen = [...new Map(d2.map((d) => [d.constructor, TEAM_COLORS[d.team]])).entries()];
   legend(document.getElementById("legend2"), seen);
@@ -101,7 +113,7 @@ async function main() {
 
   // 4. Finish rate
   const d4 = r.finish_rate;
-  const c4 = line("c4", d4.map((d) => d.year), d4.map((d) => d.finish_rate), {
+  const c4 = line("c4", d4.map((d) => yl(d.year)), d4.map((d) => d.finish_rate), {
     color: TEAM_COLORS.Sauber, fmt: fmtPct, min: 50, max: 100, tickFmt: (v) => v + "%",
   });
   c4.options.plugins.tooltip.callbacks.label = (c) => {
@@ -111,8 +123,8 @@ async function main() {
 
   // 5. Places gained per race; DRS era (2011-2013) highlighted
   const d5 = r.track_gains;
-  const c5 = bar("c5", d5.map((d) => d.year), d5.map((d) => d.gains_per_race), {
-    colors: d5.map((d) => (d.year >= 2011 && d.year <= 2013 ? TEAM_COLORS.VCARB : "#3d6f99")),
+  const c5 = bar("c5", d5.map((d) => yl(d.year)), d5.map((d) => d.gains_per_race), {
+    colors: d5.map((d) => fade(d.year, d.year >= 2011 && d.year <= 2013 ? TEAM_COLORS.VCARB : "#3d6f99")),
     fmt: fmt1,
   });
   c5.options.plugins.tooltip.callbacks.label = (c) => {
@@ -169,10 +181,13 @@ async function main() {
 
   // 7. Races per season
   const d7 = r.calendar;
-  const c7 = bar("c7", d7.map((d) => d.year), d7.map((d) => d.races), { colors: TEAM_COLORS.McLaren });
+  const c7 = bar("c7", d7.map((d) => yl(d.year)), d7.map((d) => d.races), {
+    colors: d7.map((d) => fade(d.year, TEAM_COLORS.McLaren)),
+  });
   c7.options.plugins.tooltip.callbacks.label = (c) => {
     const d = d7[c.dataIndex];
-    return ` ${d.races} races, ${fmtInt(d.laps)} laps completed by the field`;
+    const soFar = P && d.year === P.year ? " so far (season in progress)" : "";
+    return ` ${d.races} races, ${fmtInt(d.laps)} laps completed by the field${soFar}`;
   };
 
   // 8. Wins by nationality
